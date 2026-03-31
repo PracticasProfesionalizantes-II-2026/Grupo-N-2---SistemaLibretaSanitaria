@@ -1,7 +1,7 @@
 ## Grupo-2--SistemaLibreta-Sanitaria-
 ### Augusto Fiorito y Francisco Osenda
 <div align="center">
-    <img src="Issue/Banner.jpeg" alt="Banner" width="100%">
+    <img src="Issue/Banner.jpeg" alt="Banner" width="800">
   
   ## ✨ Libreta Sanitaria Digital - PetCloud ✨
 </div>
