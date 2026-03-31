@@ -1,7 +1,7 @@
 # Grupo-2--SistemaLibreta-Sanitaria-
 # Augusto Fiorito y Francisco Osenda
 <div align="center">
-[https://github.com/PracticasProfesionalizantes-II-2026/Grupo-N-2---SistemaLibretaSanitaria/issues/1#issue-4174767524]
+https://github.com/PracticasProfesionalizantes-II-2026/Grupo-N-2---SistemaLibretaSanitaria/issues/1#issue-4174767524
   
   # ✨ Libreta Sanitaria Digital - PetCloud ✨
 </div>
