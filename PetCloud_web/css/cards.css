@@ -1,0 +1,75 @@
+.top-cards {
+    display: flex;
+    gap: 10px;
+    font-family: sans-serif;
+}
+
+.card {
+    height: 170px;
+    width: 50%;
+    border-radius: 10px;
+    position: relative;
+}
+
+/*colores de fondo*/
+.card-vacunacion {
+    background-color: #55a8ae;
+}
+
+.card-mascota {
+    background-color: #7e7a7a;
+}
+
+/*titulos*/
+.card h3 {
+    color: white;
+    padding: 5px 10px;
+}
+
+/*contenido general*/
+.card-content {
+    padding: 10px;
+}
+
+/*parrafos vacunacion*/
+.card-vacunacion p {
+    margin-left: 10px;
+    color: white;
+    font-size: 12px;
+    margin-top: 2px;
+}
+
+/*Parrafos mascota*/
+.card-mascota p {
+    color: white;
+    font-size: 12px;
+    padding: 3px 10px;
+}
+
+
+/*ubicacin (abajo drecha)*/
+.card-vacunacion .ubicacion {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+.info-mascota {
+    display: flex;
+    gap: 20px;
+    margin-left: 4rem;
+}
+
+.col {
+    width: 50%;
+}
+
+.info-mascota p {
+    margin: 2px 0;
+    font-size: 12px;
+}
+
+.card-mascota .nombre {
+    margin-left: 4rem;
+    color: white;
+}

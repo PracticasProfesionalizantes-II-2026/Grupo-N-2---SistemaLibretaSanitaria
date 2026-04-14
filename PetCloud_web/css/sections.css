@@ -1,0 +1,47 @@
+.gestion {
+    color: white;
+    font-family: sans-serif;
+    margin-top: 10px;
+}
+
+.gestion .grid {
+    display: flex;
+}
+
+.gestion .grid .item {
+    display: flex;
+    justify-content: center;
+    /* centra horizontal */
+    align-items: flex-end;
+    /* manda el contenido abajo */
+    margin: 10px;
+    background-color: #303030;
+    height: 120px;
+    width: 120px;
+    border-radius: 5px;
+    font-family: sans-serif;
+    padding-bottom: 10px;
+    /* 👈 lo sube un poco */
+}
+
+.herramientas {
+    color: white;
+    font-family: sans-serif;
+    margin-top: 10px;
+}
+
+.herramientas .item {
+    display: flex;
+    justify-content: center;
+    /* centra horizontal */
+    align-items: flex-end;
+    /* manda el contenido abajo */
+    margin: 10px;
+    background-color: #303030;
+    height: 120px;
+    width: 120px;
+    border-radius: 5px;
+    font-family: sans-serif;
+    padding-bottom: 10px;
+    /* 👈 lo sube un poco */
+}
