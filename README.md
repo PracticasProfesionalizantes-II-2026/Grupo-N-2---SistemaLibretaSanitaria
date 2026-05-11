@@ -15,4 +15,4 @@
 >
 >[Mockups](https://www.figma.com/proto/rL316115OMlUjJtVWd4iok/Libreta-Sanitaria-Para-Mascotas?node-id=124-9&starting-point-node-id=124%3A9)
 >
->[Documentación de API's](https://docs.google.com/document/d/1PYVahZaMSisU3pgxW0HN8boeJq1p-CxbPQK4cf9UbJs/edit?tab=t.0)
+>[Documentación de API's](https://docs.google.com/document/d/146YUBHWqQlodOakj_Os80AiNU2CGp3agyW60ib8Wte0/edit?tab=t.0)
