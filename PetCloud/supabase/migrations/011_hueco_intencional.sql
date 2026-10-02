@@ -1,0 +1,20 @@
+-- 011 · Hueco intencional. Este archivo no cambia el esquema.
+--
+-- Existe para responder una sola pregunta antes de que alguien la haga: por qué
+-- las migraciones van de la 010 a la 012. No falta ningún archivo ni se perdió
+-- ningún cambio de esquema.
+--
+-- Hubo una 011: `011_visit_summary.sql`, que agregaba `visits.summary` para
+-- guardar lo que se escribe al cerrar una atención. Se borró en el commit
+-- `09e7e9b`, y en ese mismo commit nació `012_visit_summary_and_owner_contact.sql`,
+-- que la absorbió entera —el `ALTER TABLE`, el `COMMENT` y la prosa que explica
+-- por qué el resumen no es un `medical_records`— y le sumó el contacto del dueño.
+--
+-- Es decir: la 011 no se descartó, se fusionó. Su contenido está vivo dentro de
+-- la 012. Renumerar las migraciones posteriores para tapar el hueco habría sido
+-- peor: cambiar el número de una migración ya aplicada rompe el historial de
+-- quien ya la corrió, y ese daño es real a cambio de una prolijidad que no
+-- cambia nada.
+--
+-- Por eso el número queda libre a propósito. Si algún día hace falta un cambio
+-- de esquema nuevo, va con el número siguiente al último, nunca acá.

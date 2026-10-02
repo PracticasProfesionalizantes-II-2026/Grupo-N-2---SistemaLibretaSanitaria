@@ -1,0 +1,218 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+  Tokens de diseño. Se definen dos veces: en :root (tema claro) y en .dark
+  (tema oscuro). Los componentes nunca leen estos valores directamente, usan
+  las utilidades de Tailwind que se mapean abajo en @theme inline.
+
+  La escala de marca se invierte en oscuro (50 <-> 950): así un
+  `bg-brand-50 text-brand-700` sigue siendo "fondo tenue + texto legible" en
+  ambos temas, sin condicionales en cada componente.
+*/
+:root {
+  /* Superficies */
+  --pc-background: #ffffff;
+  --pc-foreground: #0f172a;
+  --pc-muted: #f8fafc;
+  --pc-muted-foreground: #64748b;
+  --pc-border: #e2e8f0;
+  --pc-card: #ffffff;
+  --pc-ring: #0d9488;
+
+  /* Marca — teal (salud, confianza, tecnología) */
+  --pc-brand-50: #f0fdfa;
+  --pc-brand-100: #ccfbf1;
+  --pc-brand-200: #99f6e4;
+  --pc-brand-300: #5eead4;
+  --pc-brand-400: #2dd4bf;
+  --pc-brand-500: #14b8a6;
+  --pc-brand-600: #0d9488;
+  --pc-brand-700: #0f766e;
+  --pc-brand-800: #115e59;
+  --pc-brand-900: #134e4a;
+  --pc-brand-950: #042f2c;
+
+  /*
+    Superficie de marca: bloques teal saturados con texto blanco encima
+    (tarjeta de campaña, banner corporativo). NO se invierte en oscuro —
+    si lo hiciera, el texto blanco quedaría sobre un teal claro.
+  */
+  --pc-brand-surface: #0f766e;
+  --pc-brand-surface-hover: #115e59;
+
+  /* Acento cálido — destacados, campañas */
+  --pc-accent-50: #fffbeb;
+  --pc-accent-100: #fef3c7;
+  --pc-accent-200: #fde68a;
+  --pc-accent-300: #fcd34d;
+  --pc-accent-400: #fbbf24;
+  --pc-accent-500: #f59e0b;
+  --pc-accent-600: #d97706;
+  --pc-accent-700: #b45309;
+
+  /*
+    Serie categórica de los gráficos (3 slots: perro / gato / otro).
+
+    No se invierte en oscuro y no hace falta: la terna valida contra las dos
+    superficies del producto (#ffffff y #111a2b) con el mismo hex. Verificado con
+    el validador de la guía de visualización, all-pairs y en los dos modos:
+    banda de luminosidad OK, croma OK, separación CVD ΔE 13.8 (piso 8), visión
+    normal ΔE 28.8 (piso 15) y contraste ≥ 3:1.
+
+    El orden de los slots es el mecanismo de seguridad, no decoración: no se
+    reordena ni se agrega un 4º hue generado. Una 4ª categoría se pliega en
+    "Otros" o se abre en gráficos chicos.
+
+    Para magnitud (cobertura por barrio, mapa de calor) NO se usa esta terna:
+    va la escala de marca `brand-100..700`, que ya se invierte sola en oscuro y
+    deja los valores bajos cerca de la superficie en ambos temas.
+  */
+  --pc-chart-1: #0d9488;
+  --pc-chart-2: #ea580c;
+  --pc-chart-3: #7c3aed;
+
+  /* Estados */
+  --pc-success: #16a34a;
+  --pc-success-soft: #f0fdf4;
+  --pc-warning: #d97706;
+  --pc-warning-soft: #fffbeb;
+  --pc-danger: #dc2626;
+  --pc-danger-soft: #fef2f2;
+  --pc-info: #0284c7;
+  --pc-info-soft: #f0f9ff;
+}
+
+.dark {
+  --pc-background: #0b1220;
+  --pc-foreground: #e6edf7;
+  --pc-muted: #131c2e;
+  --pc-muted-foreground: #94a3b8;
+  --pc-border: #24314a;
+  --pc-card: #111a2b;
+  --pc-ring: #2dd4bf;
+
+  --pc-brand-50: #0c2b29;
+  --pc-brand-100: #10403b;
+  --pc-brand-200: #14554e;
+  --pc-brand-300: #1a6b62;
+  --pc-brand-400: #26a094;
+  --pc-brand-500: #2dd4bf;
+  --pc-brand-600: #14b8a6;
+  --pc-brand-700: #5eead4;
+  --pc-brand-800: #99f6e4;
+  --pc-brand-900: #ccfbf1;
+  --pc-brand-950: #f0fdfa;
+
+  --pc-brand-surface: #115e59;
+  --pc-brand-surface-hover: #134e4a;
+
+  --pc-accent-50: #3a2506;
+  --pc-accent-100: #4d3208;
+  --pc-accent-200: #6b450b;
+  --pc-accent-300: #92610f;
+  --pc-accent-400: #d99b1a;
+  --pc-accent-500: #f0b429;
+  --pc-accent-600: #fbbf24;
+  --pc-accent-700: #fcd34d;
+
+  --pc-success: #4ade80;
+  --pc-success-soft: #0d2a1a;
+  --pc-warning: #fbbf24;
+  --pc-warning-soft: #33260a;
+  --pc-danger: #f87171;
+  --pc-danger-soft: #331617;
+  --pc-info: #38bdf8;
+  --pc-info-soft: #0a2537;
+}
+
+@theme inline {
+  --color-background: var(--pc-background);
+  --color-foreground: var(--pc-foreground);
+  --color-muted: var(--pc-muted);
+  --color-muted-foreground: var(--pc-muted-foreground);
+  --color-border: var(--pc-border);
+  --color-card: var(--pc-card);
+  --color-ring: var(--pc-ring);
+
+  --color-brand-50: var(--pc-brand-50);
+  --color-brand-100: var(--pc-brand-100);
+  --color-brand-200: var(--pc-brand-200);
+  --color-brand-300: var(--pc-brand-300);
+  --color-brand-400: var(--pc-brand-400);
+  --color-brand-500: var(--pc-brand-500);
+  --color-brand-600: var(--pc-brand-600);
+  --color-brand-700: var(--pc-brand-700);
+  --color-brand-800: var(--pc-brand-800);
+  --color-brand-900: var(--pc-brand-900);
+  --color-brand-950: var(--pc-brand-950);
+  --color-brand-surface: var(--pc-brand-surface);
+  --color-brand-surface-hover: var(--pc-brand-surface-hover);
+
+  --color-accent-50: var(--pc-accent-50);
+  --color-accent-100: var(--pc-accent-100);
+  --color-accent-200: var(--pc-accent-200);
+  --color-accent-300: var(--pc-accent-300);
+  --color-accent-400: var(--pc-accent-400);
+  --color-accent-500: var(--pc-accent-500);
+  --color-accent-600: var(--pc-accent-600);
+  --color-accent-700: var(--pc-accent-700);
+
+  --color-chart-1: var(--pc-chart-1);
+  --color-chart-2: var(--pc-chart-2);
+  --color-chart-3: var(--pc-chart-3);
+
+  --color-success: var(--pc-success);
+  --color-success-soft: var(--pc-success-soft);
+  --color-warning: var(--pc-warning);
+  --color-warning-soft: var(--pc-warning-soft);
+  --color-danger: var(--pc-danger);
+  --color-danger-soft: var(--pc-danger-soft);
+  --color-info: var(--pc-info);
+  --color-info-soft: var(--pc-info-soft);
+
+  --radius-sm: 0.375rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+
+  --font-sans: var(--font-jakarta);
+}
+
+/*
+  Entrada del aviso de escaneo del modo campaña. Va en CSS y no en estado de
+  React: el cartel aparece una sola vez por escaneo y no necesita que el
+  componente sepa en qué punto de la animación está.
+*/
+@keyframes pc-flash-in {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+body {
+  background: var(--pc-background);
+  color: var(--pc-foreground);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+/*
+  Oculta la scrollbar de un contenedor con scroll horizontal por swipe (la
+  barra de acciones de la ficha del paciente, en mobile). El scroll sigue
+  funcionando con el dedo o la rueda; lo que desaparece es solo el indicador
+  visual, que ahí no aporta nada.
+*/
+.scrollbar-hide {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}

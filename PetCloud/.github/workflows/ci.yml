@@ -1,0 +1,60 @@
+# Verificaciones automáticas de PetCloud.
+#
+# Corre en cada push a master y en cada pull request hacia master. Existe para
+# que nadie tenga que acordarse de correr las verificaciones a mano: lo que no
+# es automático, con el tiempo deja de pasar.
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+# Si llegan dos pushes seguidos a la misma rama, la corrida vieja se cancela.
+# Nadie mira el resultado de un commit que ya quedó atrás, y la cola se libera.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verificar:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          # Node 24: la versión con la que se desarrolla.
+          node-version: 24
+          cache: npm
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      # Los pasos van del más barato al más caro, a propósito: si el formato
+      # está mal, no tiene sentido esperar tres minutos de build para enterarse.
+      # Cada paso corta la corrida y devuelve la respuesta lo antes posible.
+      - name: Formato
+        run: npm run format:check
+
+      - name: Lint
+        run: npm run lint
+
+      # `npm run typecheck` corre `next typegen` antes que `tsc`, y no es un
+      # detalle de CI: PageProps y LayoutProps son tipos globales que Next
+      # genera en .next/types/routes.d.ts, y 36 archivos de app/ los usan. En
+      # una máquina que ya buildeó alguna vez el archivo está y no se nota;
+      # en un runner limpio no existe y tsc tira 37 errores TS2304. El arreglo
+      # vive en el script para que un clon nuevo tampoco se coma el problema.
+      - name: Tipos
+        run: npm run typecheck
+
+      # Los unitarios van antes del build: son segundos contra minutos, y
+      # cubren la validación de todos los formularios de la aplicación.
+      - name: Tests unitarios
+        run: npm test
+
+      - name: Build
+        run: npm run build
