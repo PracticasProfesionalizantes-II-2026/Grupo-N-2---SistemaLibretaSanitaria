@@ -19,7 +19,7 @@ import type { MovementKind, MovementReason } from "@/types/erp";
  * de esta tabla del lado de la base.
  *
  * Puro a propósito, como `sale-pricing.ts` o `scan-buffer.ts`: no toca React
- * ni Supabase, así que se prueba sin levantar nada.
+ * ni base de datos, así que se prueba sin levantar nada.
  */
 
 type MotivoMeta = {

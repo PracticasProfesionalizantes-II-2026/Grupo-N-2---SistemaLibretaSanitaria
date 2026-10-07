@@ -10,9 +10,6 @@
 !.yarn/releases
 !.yarn/versions
 
-# testing
-/coverage
-
 # next.js
 /.next/
 /out/
@@ -35,18 +32,12 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
-# .env.example sí se commitea: no tiene claves, documenta cuáles hacen falta.
-!.env.example
 
 
 # typescript
 *.tsbuildinfo
 next-env.d.ts
 
-
-# Consultas sueltas que guarda Supabase Studio al usar el SQL Editor.
-# Son borradores locales de cada persona, no parte del esquema.
-supabase/snippets/
 
 # Planilla del catálogo compartido: sus datos entran por la migración generada
 /productos_petshop.xlsx

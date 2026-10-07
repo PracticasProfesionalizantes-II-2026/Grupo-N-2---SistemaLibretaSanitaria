@@ -23,7 +23,7 @@
 -- InitPlan: se calcula una sola vez por consulta y el resultado se reusa en
 -- todas las filas. Ninguna de las funciones depende de la fila —solo de quién
 -- consulta—, así que el resultado es idéntico; cambia solo cuándo se calcula.
--- Es el patrón que recomienda la documentación de Supabase para RLS.
+-- Es el patrón que recomienda la documentación de Postgres para RLS.
 --
 -- Las políticas se reescriben con las mismas expresiones de la 116. Ninguna
 -- regla cambia: agregan las veterinarias con ERP, corrige solo el admin.

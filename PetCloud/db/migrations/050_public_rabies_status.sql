@@ -20,7 +20,7 @@
 -- (038). Acá sería un agujero. El motivo está documentado en `046:121-128`:
 -- **ambos entornos terminan otorgando `EXECUTE ON ALL FUNCTIONS IN SCHEMA
 -- public` a `anon` y `authenticated`** — producción por default privileges, y
--- `supabase/seed.sql:24` en local, a propósito, para imitarla. La línea 32 de
+-- `seed.sql:24` en local, a propósito, para imitarla. La línea 32 de
 -- ese mismo archivo extiende el privilegio a las funciones **futuras**, así que
 -- toda función nueva nace ejecutable por `anon`.
 --

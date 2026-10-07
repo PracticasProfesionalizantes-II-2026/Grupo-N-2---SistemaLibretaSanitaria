@@ -10,7 +10,7 @@
 --
 -- No es prolijidad ni convención de nombres: es **orden de ejecución**. Las
 -- migraciones corren en orden lexicográfico, así que la serie `0xx` entera
--- corre ANTES que la `1xx`. En un `supabase db reset` limpio, esta migración se
+-- corre ANTES que la `1xx`. En un reset de la base limpio, esta migración se
 -- aplica cuando el schema `erp` todavía no existe — la 100 lo crea cuarenta y
 -- tres archivos más adelante. Una `057` que tocara `erp.sales` no sería un
 -- problema de territorio: rompería el reset con "schema erp does not exist".

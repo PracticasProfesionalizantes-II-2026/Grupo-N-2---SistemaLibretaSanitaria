@@ -15,7 +15,7 @@ import {
 import type { Permiso } from "@/features/owner/lib/permissions";
 import type { Pet, PetDocument } from "@/types/pet";
 import type { Reminder } from "@/types/schedule";
-import type { Tables } from "@/types/supabase";
+import type { Tables } from "@/types/database";
 import type { Visit } from "@/types/visit";
 import {
   iOwnPet,

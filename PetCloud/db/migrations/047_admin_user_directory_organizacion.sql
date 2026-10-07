@@ -53,7 +53,7 @@
 -- documenta: el `GRANT EXECUTE` a `authenticated` es imprescindible para que
 -- PostgREST enrute la llamada, así que ese `IF` es lo único que separa a
 -- cualquier cuenta con sesión de un volcado completo de cuentas/PII vía
--- `supabase.rpc()` directo, salteándose el `requireAdmin()` de la página.
+-- `rpc()` directo, salteándose el `requireAdmin()` de la página.
 -- Sumar una columna no puede aflojar esa condición.
 -- ============================================================================
 

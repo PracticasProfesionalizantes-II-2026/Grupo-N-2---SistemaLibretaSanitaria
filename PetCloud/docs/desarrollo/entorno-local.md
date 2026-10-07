@@ -10,8 +10,8 @@
 
 ```bash
 npm install
-cp .env.example .env.local   # completar los valores (ver abajo)
-npm run db:migrate           # aplica el esquema (supabase/migrations + db/shims)
+# crear .env.local con las variables de la tabla de abajo
+npm run db:migrate           # aplica el esquema (db/migrations + db/shims)
 DEMO_PASSWORD=<clave-local> npm run seed:demo
 npm run dev                  # http://localhost:3000
 ```
@@ -25,9 +25,8 @@ npm run dev                  # http://localhost:3000
 | `NEXT_PUBLIC_SITE_URL`            | Origen del sitio. Opcional: por defecto `http://localhost:3000`. |
 | `STORAGE_DRIVER`                  | `local` (por defecto, guarda en `./.storage`) o `azure`.         |
 | `AZURE_STORAGE_CONNECTION_STRING` | Solo con `STORAGE_DRIVER=azure`.                                 |
-| `PREMIUM_CHECKOUT_SIMULADO`       | `true` activa Premium sin pasar por Mercado Pago.                |
 
-`.env.local` no se commitea. `.env.example` lista las variables sin valores.
+`.env.local` no se commitea: los valores se comparten por fuera del repositorio.
 
 ### Base local con Docker (opcional)
 

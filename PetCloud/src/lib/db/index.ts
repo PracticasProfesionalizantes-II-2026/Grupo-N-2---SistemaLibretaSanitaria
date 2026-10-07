@@ -5,7 +5,7 @@ import { drizzle, type NodePgDatabase } from "drizzle-orm/node-postgres";
 import pg from "pg";
 
 import * as schema from "@/lib/db/schema/schema";
-import type { Database } from "@/types/supabase";
+import type { Database } from "@/types/database";
 
 /**
  * Data access over Azure Database for PostgreSQL (or any Postgres 16).
@@ -28,7 +28,7 @@ function createPool(): pg.Pool {
   const url = process.env.DATABASE_URL;
   if (!url) {
     throw new Error(
-      "Falta DATABASE_URL en .env.local (ver .env.example y docs/desarrollo/entorno-local.md).",
+      "Falta DATABASE_URL en .env.local (ver docs/desarrollo/entorno-local.md).",
     );
   }
 
@@ -90,7 +90,7 @@ export async function withUser<T>(
 }
 
 /**
- * Runs `fn` as `service_role`, the equivalent of Supabase's admin client:
+ * Runs `fn` as `service_role`, the equivalent of the former admin client:
  * triggers that exempt `current_user = 'service_role'` let the write through,
  * and the `service_role_all` policies (db/shims/999) emulate BYPASSRLS.
  */
@@ -108,7 +108,7 @@ export async function withServiceRole<T>(fn: (tx: Tx) => Promise<T>) {
  * Note: interpolating a JS array in a `sql` template expands it to a tuple
  * (`($1, $2)`); wrap it in `sql.param(array)` to send it as one Postgres array.
  *
- * Calls a SQL function (ex-`supabase.rpc`) with named arguments:
+ * Calls a SQL function (ex `rpc()` client call) with named arguments:
  * `rpc(tx, "my_fn", { p_id: id })` → `select * from my_fn(p_id => $1)`.
  * Returns the rows; scalar functions come back as `[{ my_fn: value }]`.
  */
@@ -135,8 +135,8 @@ export async function rpc<Row = Record<string, unknown>>(
 }
 
 /**
- * Raw SQL read that returns snake_case rows, the same shape the old Supabase
- * client returned, so the existing mappers and `@/types/supabase` row types
+ * Raw SQL read that returns snake_case rows, the same shape the old hosted
+ * client returned, so the existing mappers and `@/types/database` row types
  * keep working: `query<Tables<"pets">>(getDb(), sql\`select * from pets\`)`.
  */
 export async function query<Row = Record<string, unknown>>(
@@ -165,7 +165,7 @@ const defined = (row: Record<string, unknown>) =>
 
 /**
  * `insert into <table> (cols) select <values> [where <guard>]` from a
- * snake_case object (ex-`supabase.from(t).insert(row)`). `undefined` values
+ * snake_case object (ex `from(t).insert(row)` client call). `undefined` values
  * are skipped so column defaults apply. The optional guard lets the insert
  * check permissions (e.g. `has_pet_access(...)`); append `returning ...`.
  */

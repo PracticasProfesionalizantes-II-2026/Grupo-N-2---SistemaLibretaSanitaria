@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { centsToMpAmount, formatARS, pesosToCents } from "@/lib/money";
+import { formatARS, pesosToCents } from "@/lib/money";
 
 describe("formatARS", () => {
   it("formatea centavos como pesos argentinos con dos decimales", () => {
@@ -16,20 +16,6 @@ describe("formatARS", () => {
   });
 });
 
-describe("centsToMpAmount", () => {
-  it("convierte centavos a pesos para el body de Mercado Pago", () => {
-    expect(centsToMpAmount(150000)).toBe(1500);
-  });
-
-  it("conserva los centavos como decimales", () => {
-    expect(centsToMpAmount(1999)).toBe(19.99);
-  });
-
-  it("redondea un valor no entero antes de dividir", () => {
-    expect(centsToMpAmount(1999.6)).toBe(20);
-  });
-});
-
 describe("pesosToCents", () => {
   it("convierte pesos enteros a centavos", () => {
     expect(pesosToCents(1500)).toBe(150000);
@@ -37,10 +23,5 @@ describe("pesosToCents", () => {
 
   it("no arrastra el drift de punto flotante de los decimales", () => {
     expect(pesosToCents(19.99)).toBe(1999);
-  });
-
-  it("es la inversa de centsToMpAmount para valores con dos decimales", () => {
-    const centavos = 123456;
-    expect(pesosToCents(centsToMpAmount(centavos))).toBe(centavos);
   });
 });

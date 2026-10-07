@@ -14,7 +14,7 @@ import {
 } from "@/features/vet/schemas/vet-schemas";
 import { insertInto, query, updateSet, withUser } from "@/lib/db";
 import type { ActionResult } from "@/features/vet/actions/consultation-actions";
-import type { Database } from "@/types/supabase";
+import type { Database } from "@/types/database";
 
 /**
  * Turnos: crear, reprogramar, cancelar y marcar estado.

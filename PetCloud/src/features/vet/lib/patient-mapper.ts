@@ -1,5 +1,5 @@
 import { toPet } from "@/features/owner/lib/mappers";
-import type { Database } from "@/types/supabase";
+import type { Database } from "@/types/database";
 import type { Patient, PatientOwner } from "@/types/vet";
 
 /**

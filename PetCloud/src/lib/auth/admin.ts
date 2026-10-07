@@ -7,12 +7,12 @@ import { getDb, type Db, type Tx } from "@/lib/db";
 import { usersInAuth } from "@/lib/db/schema/schema";
 
 /**
- * Replacement for `supabase.auth.admin.*` over the `auth.users` table that
- * db/shims/000_supabase_compat.sql creates. The triggers from the migrations
+ * Replacement for the former hosted auth admin API over the `auth.users` table that
+ * db/shims/000_compat.sql creates. The triggers from the migrations
  * (handle_new_user, sync_role_to_auth...) still fire on these writes, so the
  * profile row and `raw_app_meta_data.role` keep being derived in the database.
  *
- * Shapes mimic Supabase's `User` (snake_case) so callers port with few changes.
+ * Shapes mimic the former auth `User` (snake_case) so callers port with few changes.
  */
 
 type Executor = Db | Tx;
@@ -29,7 +29,7 @@ export type AuthUser = {
   created_at: string;
 };
 
-/** Same cost Supabase (GoTrue) used, so old and new hashes are equivalent. */
+/** Same cost the former auth server (GoTrue) used, so old and new hashes are equivalent. */
 const BCRYPT_ROUNDS = 10;
 
 const hashPassword = (password: string) => bcrypt.hash(password, BCRYPT_ROUNDS);

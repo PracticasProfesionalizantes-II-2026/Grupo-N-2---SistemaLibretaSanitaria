@@ -3,7 +3,7 @@ import {
   hoyArgentina,
   horaArgentina,
 } from "@/lib/argentina-time";
-import type { Database } from "@/types/supabase";
+import type { Database } from "@/types/database";
 import type {
   Reminder,
   ReminderRepeat,
@@ -76,7 +76,7 @@ const origen = (verified: boolean): RecordSource =>
   verified ? "veterinario" : "dueno";
 
 /**
- * `review_status` ya está en `types/supabase.ts` (migración 043, aplicada) —
+ * `review_status` ya está en `types/database.ts` (migración 043, aplicada) —
  * la columna real es `TEXT` sin un `CREATE TYPE` propio, así que el generador
  * la tipa como `string` liso, no como el literal que exige acá. El `CHECK`
  * de la 043 ya garantiza que el valor real es uno de estos cuatro; acá solo

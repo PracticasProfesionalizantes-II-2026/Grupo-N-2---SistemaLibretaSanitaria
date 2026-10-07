@@ -1,13 +1,13 @@
 -- Runs after every migration (re-applied on each db:migrate run).
 --
--- In Supabase every SECURITY DEFINER function is owned by `postgres`, so
+-- On the original platform every SECURITY DEFINER function is owned by `postgres`, so
 -- inside them `current_user = 'postgres'` and the guard triggers that exempt
 -- `current_user IN ('service_role', 'postgres', 'supabase_admin')` let their
 -- writes through (e.g. admin_set_vet_license -> protect_vet_privileges).
 --
 -- Here the migrations run as the app admin, which then owns those functions,
 -- and the triggers silently reverted what the functions wrote. Handing them
--- to `service_role` restores the Supabase behaviour: the function body runs
+-- to `service_role` restores the original behaviour: the function body runs
 -- as service_role (exempt from the guards, RLS emulated by 999), while the
 -- app's own direct writes still run as the admin and stay guarded.
 

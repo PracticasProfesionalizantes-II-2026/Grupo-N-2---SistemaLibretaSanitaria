@@ -5,7 +5,7 @@ import type {
   SaleItem,
   SaleStatus,
 } from "@/types/erp";
-import type { Database } from "@/types/supabase";
+import type { Database } from "@/types/database";
 
 /**
  * De fila de base a modelo de vista, módulo de Ventas (migración 108).
@@ -16,7 +16,7 @@ import type { Database } from "@/types/supabase";
  *
  * `payment_method`, `status` y `code` llegan como `string`: los CHECK de la
  * 108 los restringen en la base, pero un CHECK no es un tipo enumerado y
- * `supabase gen types` no tiene de dónde sacar la unión. Las uniones viven en
+ * el generador de tipos no tiene de dónde sacar la unión. Las uniones viven en
  * `types/erp.ts` y el estrechamiento se hace acá, en el borde — mismo
  * criterio que `stock-mappers.ts` con `unit`.
  */

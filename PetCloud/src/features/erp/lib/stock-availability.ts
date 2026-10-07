@@ -18,7 +18,7 @@ import type { Product, ProductUnit } from "@/types/erp";
  * que se carga la pantalla y se aprieta el botón.
  *
  * Vive en `lib/` y es puro por el mismo motivo que `sale-pricing.ts` y
- * `cash-change.ts`: sin React ni Supabase, los casos raros quedan decididos
+ * `cash-change.ts`: sin React ni base de datos, los casos raros quedan decididos
  * por escrito y probados, no enterrados en un `map` adentro del JSX.
  */
 

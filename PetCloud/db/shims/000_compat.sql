@@ -1,7 +1,7 @@
--- Supabase compatibility shim for plain PostgreSQL 16 (Azure Flexible Server).
+-- Compatibility shim for plain PostgreSQL 16 (Azure Flexible Server).
 --
--- Recreates the minimum surface of Supabase that the migrations in
--- supabase/migrations depend on, so they apply unchanged:
+-- Recreates the minimum surface (auth schema, roles, storage) that the migrations in
+-- db/migrations depend on, so they apply unchanged:
 --   * roles anon / authenticated / service_role / supabase_auth_admin (NOLOGIN)
 --   * schema auth: auth.users, auth.uid(), auth.jwt(), auth.role(), auth.email()
 --   * schema storage: storage.buckets, storage.objects, storage.foldername()...

@@ -20,7 +20,7 @@ import {
 } from "@/features/erp/schemas/barcode-schemas";
 import { erpWrite } from "@/features/erp/lib/erp-sql";
 import { insertInto } from "@/lib/db";
-import type { Database } from "@/types/supabase";
+import type { Database } from "@/types/database";
 
 /**
  * Escrituras del módulo de códigos de barra (migración 113).

@@ -14,8 +14,7 @@ import { requireVet, type VetSession } from "@/features/vet/lib/vet-session";
  * `vet_subscriptions.status` (migración 040).
  *
  * `"vencido"` cubre todo lo que hoy NO da acceso pero alguna vez tuvo una fila
- * en `vet_subscriptions`: autorizada con el período ya vencido (rezago del
- * webhook), en mora fuera de los 7 días de gracia, cancelada con el período
+ * en `vet_subscriptions`: autorizada con el período ya vencido, en mora fuera de los 7 días de gracia, cancelada con el período
  * pagado ya terminado, un cobro rechazado (`rejected`) o un checkout todavía
  * sin confirmar (`pending`). La pantalla de facturación (fase 6) lee el
  * detalle fino directamente de `vet_subscriptions` cuando lo necesita; acá

@@ -5,7 +5,7 @@ import { getStorage, PUBLIC_BUCKETS } from "@/lib/storage";
 
 /**
  * Serves stored files. Public buckets (pet and profile photos) are open, like
- * they were in Supabase; the rest require a session.
+ * they were in the previous storage service; the rest require a session.
  *
  * Per-object authorization (the storage.objects RLS policies) is not enforced
  * yet: any signed-in user can read a private file if they know its path.

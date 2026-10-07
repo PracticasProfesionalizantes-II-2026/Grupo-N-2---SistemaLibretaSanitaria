@@ -7,7 +7,7 @@ import { sql } from "drizzle-orm";
 import { requireUser } from "@/features/auth/lib/current-user";
 import { getDb, query } from "@/lib/db";
 import { storageUrl } from "@/lib/storage";
-import type { Tables } from "@/types/supabase";
+import type { Tables } from "@/types/database";
 import {
   toAntiparasitic,
   toMedication,

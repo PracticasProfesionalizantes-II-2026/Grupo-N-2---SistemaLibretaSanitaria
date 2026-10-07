@@ -1,5 +1,5 @@
 import type { Product, ProductUnit, StockStatus } from "@/types/erp";
-import type { Database } from "@/types/supabase";
+import type { Database } from "@/types/database";
 
 type ProductRow = Database["erp"]["Tables"]["products"]["Row"];
 
@@ -7,7 +7,7 @@ type ProductRow = Database["erp"]["Tables"]["products"]["Row"];
  * Exactamente las columnas que pide `COLUMNAS_PRODUCTO` en `data/stock.ts`, ni
  * una más.
  *
- * No es `ProductRow` entera a propósito: el cliente tipado de Supabase estrecha
+ * No es `ProductRow` entera a propósito: el cliente tipado anterior estrecha
  * el resultado a la proyección, así que pedir la fila completa acá haría que
  * `.map(toProduct)` no compile. Y está bien que sea así — si mañana el mapper
  * necesita `institution_id`, el error de compilación aparece en el `select`
@@ -73,7 +73,7 @@ export function estadoDeStock(stock: number, minimo: number): StockStatus {
  *
  * `fila.unit` llega como `string` y no como `ProductUnit`: el CHECK de
  * `erp.products.unit` (101) restringe los valores en la base, pero un CHECK no
- * es un tipo enumerado y `supabase gen types` no tiene de dónde sacar la
+ * es un tipo enumerado y el generador de tipos no tiene de dónde sacar la
  * unión — solo los `ENUM` de verdad del schema `public` la conservan. La
  * unión vive en `types/erp.ts` y el estrechamiento se hace acá, en el único
  * punto por donde la fila cruza a modelo de vista. Mismo criterio que

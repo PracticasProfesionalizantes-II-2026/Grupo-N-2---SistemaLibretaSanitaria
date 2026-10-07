@@ -371,7 +371,7 @@ COMMENT ON FUNCTION municipality_census_export IS
 -- siendo `is_validated_municipality()`, que rechaza a quien no sea personal
 -- municipal validado). Ficha y exportación sí exponen datos personales: se
 -- revoca explícitamente de `PUBLIC`, `anon` y `authenticated` — los tres,
--- porque las políticas por defecto de este proyecto (ver `supabase/seed.sql`)
+-- porque las políticas por defecto de este proyecto (ver `seed.sql`)
 -- otorgan `EXECUTE` a los tres de forma ambiente en cuanto la función se crea,
 -- y revocar solo de `PUBLIC` dejaría en pie el otorgamiento nombrado a
 -- `authenticated`. Nadie puede ejecutarlas hasta que la 023 vuelva a

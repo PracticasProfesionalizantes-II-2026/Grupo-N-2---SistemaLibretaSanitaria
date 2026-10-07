@@ -16,7 +16,7 @@ import {
 } from "@/features/erp/schemas/purchase-schemas";
 import { erpWrite } from "@/features/erp/lib/erp-sql";
 import { insertInto, rpc, updateSet } from "@/lib/db";
-import type { Database } from "@/types/supabase";
+import type { Database } from "@/types/database";
 
 /**
  * Escrituras del módulo de Compras (migración 105).
@@ -35,7 +35,7 @@ const aCentavos = (pesos: number) => Math.round(pesos * CENTAVOS);
 
 /**
  * `created_at` y `updated_at` los pone la base (default y trigger de fecha);
- * el tipo generado los marca opcionales porque `supabase gen types` no
+ * el tipo generado los marca opcionales porque el generador de tipos no
  * distingue "podés omitirla" de "no la escribas vos". El `Omit` deja la
  * segunda lectura, que es la que vale — misma barrera que llevaba
  * `lib/erp-db.ts` antes de borrarse.

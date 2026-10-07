@@ -25,7 +25,7 @@ import {
 import type { Permiso } from "@/features/owner/lib/permissions";
 import type { Pet } from "@/types/pet";
 import type { Reminder } from "@/types/schedule";
-import type { Tables } from "@/types/supabase";
+import type { Tables } from "@/types/database";
 import type { Visit } from "@/types/visit";
 import {
   VISIT_SELECT,

@@ -113,4 +113,4 @@ GRANT EXECUTE ON FUNCTION municipality_panel_metrics() TO authenticated;
 -- ROLLBACK
 -- Volver a crear la versión de la 038 (sin `sin_datos`, con CURRENT_DATE):
 -- DROP FUNCTION IF EXISTS municipality_panel_metrics();
--- y reejecutar el CREATE de supabase/migrations/038_municipality_functions_multi_owner.sql.
+-- y reejecutar el CREATE de db/migrations/038_municipality_functions_multi_owner.sql.

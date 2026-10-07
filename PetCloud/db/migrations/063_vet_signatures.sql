@@ -57,7 +57,7 @@
 -- institución creada segundos antes, sin firmas, y la 058 ya quitó la política
 -- de DELETE de `vet_professionals` para `authenticated`. Lo que sí cambia es la
 -- limpieza de las pruebas de RLS: la cuenta de un veterinario que registró una
--- firma sobrevive a `limpiar()`, y se va con `npx supabase db reset`.
+-- firma sobrevive a `limpiar()`, y se va con `un reset de la base local`.
 --
 -- NUNCA `FORCE ROW LEVEL SECURITY`, ni acá ni en `vet_professionals`. Las
 -- funciones `SECURITY DEFINER` de abajo leen estas tablas desde políticas, y lo

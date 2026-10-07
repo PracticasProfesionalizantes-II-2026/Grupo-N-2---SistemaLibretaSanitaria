@@ -19,17 +19,7 @@
     "bootstrap:admin": "node scripts/bootstrap-admin.mjs",
     "unseed:demo": "node scripts/unseed-demo.mjs",
     "db:migrate": "node scripts/db-migrate.ts",
-    "db:introspect": "drizzle-kit pull && node scripts/db-introspect-fix.ts && prettier --write src/lib/db/schema",
-    "prepare": "husky"
-  },
-  "lint-staged": {
-    "*.{ts,tsx,mts}": [
-      "eslint --fix",
-      "prettier --write"
-    ],
-    "*.{json,md,css}": [
-      "prettier --write"
-    ]
+    "db:introspect": "drizzle-kit pull && node scripts/db-introspect-fix.ts && prettier --write src/lib/db/schema"
   },
   "dependencies": {
     "@azure/storage-blob": "^12.34.0",
@@ -64,14 +54,11 @@
     "@types/qrcode": "^1.5.6",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@vitest/coverage-v8": "^4.1.11",
     "dotenv": "^17.4.2",
     "drizzle-kit": "^0.31.11",
     "eslint": "^9",
     "eslint-config-next": "16.3.6",
     "eslint-config-prettier": "^10.1.8",
-    "husky": "^9.1.7",
-    "lint-staged": "^17.4.1",
     "prettier": "^3.9.6",
     "tailwindcss": "^4",
     "typescript": "^5",

@@ -8,7 +8,7 @@ import { revalidatePath } from "next/cache";
 import { requireUser } from "@/features/auth/lib/current-user";
 import type { ActionResult } from "@/features/owner/actions/pets-actions";
 import { getDb, query, rpc, withUser, type FnRow } from "@/lib/db";
-import type { Database } from "@/types/supabase";
+import type { Database } from "@/types/database";
 
 /**
  * Access requests between people who share a home address (migration 073).

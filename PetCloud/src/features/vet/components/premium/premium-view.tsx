@@ -10,11 +10,10 @@ import { Card } from "@/components/ui/card";
 import { ConfirmDialog } from "@/components/ui/confirm-dialog";
 import { PageHeader } from "@/components/ui/page-header";
 import { PremiumErpBenefits } from "@/features/vet/components/premium/premium-erp-benefits";
-import { simulatePremiumCheckout } from "@/features/vet/actions/premium-simulation-actions";
 import {
-  cancelPremium,
-  startPremiumCheckout,
-} from "@/features/vet/actions/subscription-actions";
+  cancelPremiumSimulado,
+  simulatePremiumCheckout,
+} from "@/features/vet/actions/premium-simulation-actions";
 import type {
   CurrentPremiumPrice,
   InstitutionSubscription,
@@ -88,7 +87,6 @@ export function PremiumView({
   premium,
   price,
   subscription,
-  checkoutSimulado,
 }: {
   /**
    * Solo el titular ve controles de pago (spec: "Billing surface is
@@ -99,17 +97,6 @@ export function PremiumView({
   premium: PremiumState;
   price: CurrentPremiumPrice | null;
   subscription: InstitutionSubscription | null;
-  /**
-   * Si el alta resuelve con el checkout simulado en vez de Mercado Pago. Lo
-   * decide el servidor (`lib/premium-simulation.ts`) y baja desde la página:
-   * acá no se puede leer `process.env`, y tampoco debería poder — el modo de
-   * cobro no es una preferencia del navegador.
-   *
-   * Cambia dos cosas visibles: a dónde va el botón de alta, y el aviso de que
-   * no se cobró nada. Lo segundo no es opcional ni decorativo: una pantalla
-   * que afirma un pago que no ocurrió es la forma más cara de equivocarse.
-   */
-  checkoutSimulado: boolean;
 }) {
   const [isPending, startTransition] = useTransition();
   const [cancelling, setCancelling] = useState(false);
@@ -117,50 +104,29 @@ export function PremiumView({
   const state = resolveViewState(premium, subscription, price);
   const badge = ESTADO_BADGE[state.kind];
 
-  /** Con el checkout simulado no se redirige a ningún lado: se procesa acá. */
-  const etiquetaEnCurso = checkoutSimulado
-    ? "Procesando el pago simulado…"
-    : "Redirigiendo a Mercado Pago...";
-
   /**
-   * El alta, por el camino que corresponda.
-   *
-   * La bifurcación vive acá y en ningún otro lado: la máquina de estados, los
-   * textos y el resto de la pantalla son los mismos para los dos modos. El
-   * simulado no redirige a ninguna parte porque no hay adónde ir a pagar; al
-   * volver, la revalidación del layout ya trae la sesión con Premium activo y
-   * la pantalla se reacomoda sola.
+   * El alta es siempre simulada (demo): no hay pasarela a la que redirigir.
+   * Al volver, la revalidación del layout ya trae la sesión con Premium
+   * activo y la pantalla se reacomoda sola.
    */
   function handleCheckout() {
     startTransition(async () => {
-      if (checkoutSimulado) {
-        const simulado = await simulatePremiumCheckout();
-
-        if (!simulado.success) {
-          toast.error(simulado.error);
-          return;
-        }
-
-        toast.success(
-          "Premium quedó activo. Fue un checkout simulado: no se cobró nada.",
-        );
-        return;
-      }
-
-      const result = await startPremiumCheckout();
+      const result = await simulatePremiumCheckout();
 
       if (!result.success) {
         toast.error(result.error);
         return;
       }
 
-      window.location.href = result.initPoint;
+      toast.success(
+        "Premium quedó activo. Pago simulado (demo): no se cobró nada.",
+      );
     });
   }
 
   function handleCancel() {
     startTransition(async () => {
-      const result = await cancelPremium();
+      const result = await cancelPremiumSimulado();
 
       if (!result.success) {
         toast.error(result.error);
@@ -169,7 +135,7 @@ export function PremiumView({
 
       setCancelling(false);
       toast.success(
-        "Le pedimos a Mercado Pago que cancele la suscripción. El cambio se refleja acá apenas Mercado Pago lo confirme.",
+        "Cancelaste la suscripción. Mantenés el acceso hasta el fin del período.",
       );
     });
   }
@@ -204,18 +170,16 @@ export function PremiumView({
             activo", ya se creyó que hubo un cobro. Mismo criterio que el cobro
             simulado de una venta en `erp/components/sales/`.
           */}
-          {checkoutSimulado ? (
+          {
             <Alert variant="warning">
-              <p className="font-semibold">
-                El cobro de Premium está simulado.
-              </p>
+              <p className="font-semibold">Pago simulado (demo).</p>
               <p className="mt-1">
                 {premium.activo
-                  ? "Premium se activó sin pasar por Mercado Pago: no se cobró nada y no hay ninguna suscripción real detrás. La facturación de verdad se habilita cuando se vuelva a activar el cobro."
-                  : "Suscribirse acá no pasa por Mercado Pago y no cobra nada: activa el módulo al instante, para probar y demostrar el producto."}
+                  ? "Premium se activó sin ningún cobro: no hay una suscripción paga real detrás."
+                  : "Suscribirse acá no cobra nada: activa el módulo al instante, para probar y demostrar el producto."}
               </p>
             </Alert>
-          ) : null}
+          }
 
           {state.kind === "sin_precio" ? (
             <Card className="p-5">
@@ -246,21 +210,20 @@ export function PremiumView({
                 onClick={handleCheckout}
                 disabled={isPending}
               >
-                {isPending ? etiquetaEnCurso : "Suscribirme"}
+                {isPending ? "Procesando el pago simulado…" : "Suscribirme"}
               </Button>
             </Card>
           ) : null}
 
           {state.kind === "pendiente" ? (
             <Alert variant="info">
-              Tu pago está en proceso. Te avisamos acá apenas Mercado Pago lo
-              confirme — todavía no activamos Premium.
+              Tu pago está en proceso — todavía no activamos Premium.
             </Alert>
           ) : null}
 
           {state.kind === "rechazado" ? (
             <Alert variant="danger">
-              <p>Mercado Pago rechazó el pago. Podés volver a intentarlo.</p>
+              <p>El pago fue rechazado. Podés volver a intentarlo.</p>
               <Button
                 size="sm"
                 variant="outline"
@@ -287,7 +250,7 @@ export function PremiumView({
                   onClick={handleCheckout}
                   disabled={isPending}
                 >
-                  {isPending ? etiquetaEnCurso : "Suscribirme"}
+                  {isPending ? "Procesando el pago simulado…" : "Suscribirme"}
                 </Button>
               ) : null}
             </Alert>
@@ -307,21 +270,11 @@ export function PremiumView({
                   </h2>
                   <p className="text-muted-foreground mt-1 text-sm">
                     {state.kind === "activo"
-                      ? checkoutSimulado
-                        ? // Sin cobro real no hay "próximo cobro" que anunciar:
-                          // decirlo igual sería inventar un movimiento de dinero
-                          // que no existe. Lo único cierto es hasta cuándo dura
-                          // el acceso que la simulación otorgó.
-                          `Acceso simulado${
-                            state.hasta
-                              ? ` hasta el ${formatTimestamp(state.hasta)}`
-                              : ""
-                          }, sin cobro asociado.`
-                        : `Próximo cobro${subscription ? `: ${formatARS(subscription.amountCents)}` : ""}${
-                            state.hasta
-                              ? ` el ${formatTimestamp(state.hasta)}`
-                              : ""
-                          }.`
+                      ? `Acceso simulado${
+                          state.hasta
+                            ? ` hasta el ${formatTimestamp(state.hasta)}`
+                            : ""
+                        }, sin cobro asociado.`
                       : `El último cobro no se pudo procesar.${
                           state.hasta
                             ? ` Tenés hasta el ${formatTimestamp(state.hasta)} para regularizarlo`
@@ -374,7 +327,7 @@ export function PremiumView({
         onConfirm={handleCancel}
         loading={isPending}
         title="¿Cancelar la suscripción Premium?"
-        description="Mercado Pago confirma la baja por su cuenta: seguís teniendo Premium hasta que llegue esa confirmación. A partir de ahí, Administración y Turnos quedan bloqueados y el resto de tus datos se conserva intacto."
+        description="Seguís teniendo Premium hasta el fin del período. A partir de ahí, Administración y Turnos quedan bloqueados y el resto de tus datos se conserva intacto."
         confirmLabel="Cancelar suscripción"
       />
     </div>

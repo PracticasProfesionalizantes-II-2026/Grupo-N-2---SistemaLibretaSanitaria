@@ -8,9 +8,9 @@
  * Las uniones de dominio (`ProductUnit`, `MovementKind`, `CashMovementKind`,
  * `CustomerDocumentType`, `CustomerTaxCondition`, `AccountMovementKind`,
  * `PaymentMethodCode`, `SaleStatus`, `ErpModule`) se definen ACÁ y no salen de
- * `types/supabase.ts`, aunque el schema `erp` ya esté generado: el schema las
+ * `types/database.ts`, aunque el schema `erp` ya esté generado: el schema las
  * restringe con `CHECK`, no con `ENUM`, y un CHECK no deja rastro en el tipo
- * generado — `supabase gen types` escribe `string` a secas. Las columnas de
+ * generado — el generador de tipos escribe `string` a secas. Las columnas de
  * `public` sí conservan la unión porque ahí son enumerados de verdad.
  *
  * La dirección es siempre `types/erp.ts` → consumidores, nunca al revés: este

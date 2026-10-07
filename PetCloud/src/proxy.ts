@@ -86,15 +86,13 @@ export const config = {
      * optimizadas, favicon y assets. Correr el proxy sobre esos sería agregarle
      * una validación de sesión a cada logo.
      *
-     * `robots.txt`, `sitemap.xml`, `manifest.webmanifest` y `sw.js` se agregan
+     * `robots.txt` y `sitemap.xml` se agregan
      * a propósito, nombre por nombre: son archivos públicos con ruta fija en
      * `public/`, y sin esta excepción el proxy los trataba como cualquier
      * pantalla de la app y los redirigía a `/login` para quien no tuviera
      * sesión — un buscador jamás la tiene, así que nunca podían leer el
-     * robots ni el sitemap, y un navegador evaluando si el sitio es instalable
-     * tampoco: sin poder pedir el manifest y el service worker sin sesión, no
-     * hay PWA que valga.
+     * robots ni el sitemap.
      */
-    "/((?!_next/static|_next/image|favicon.ico|robots\\.txt|sitemap\\.xml|manifest\\.webmanifest|sw\\.js|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico)$).*)",
+    "/((?!_next/static|_next/image|favicon.ico|robots\\.txt|sitemap\\.xml|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico)$).*)",
   ],
 };

@@ -1,7 +1,7 @@
 -- ============================================================================
 -- PetCloud — Migración 003: buckets de archivos del dueño
 --
--- Va aparte de la 002 porque toca el esquema `storage`, que es de Supabase y no
+-- Va aparte de la 002 porque toca el esquema `storage`, que viene del shim de compatibilidad y no
 -- nuestro: separarlo hace evidente qué se le pide a la plataforma y qué es
 -- nuestro modelo de datos.
 --

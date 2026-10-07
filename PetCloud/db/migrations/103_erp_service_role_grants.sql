@@ -6,7 +6,7 @@
 -- `authenticated`. Resultado: toda operación administrativa contra el ERP
 -- fallaba con 42501 "permission denied for table products".
 --
--- En `public` esto no se nota porque Supabase le concede a `service_role`
+-- En `public` esto no se nota porque el shim de compatibilidad le concede a `service_role`
 -- privilegios sobre las tablas nuevas por su cuenta. En un schema propio ese
 -- automatismo no existe, y el hueco solo aparece cuando algo intenta escribir
 -- sin sesión de usuario: un seed, un script de mantenimiento, un webhook, o
@@ -14,7 +14,7 @@
 -- con service role a propósito.
 --
 -- QUÉ SIGNIFICA Y QUÉ NO. `service_role` saltea RLS por diseño: es la llave
--- maestra del servidor y nunca viaja al navegador (`lib/supabase/admin.ts`).
+-- maestra del servidor y nunca viaja al navegador (`lib/db/index.ts`).
 -- Darle acceso al schema `erp` no relaja ni una política: las de la 101 y el
 -- trigger de la 102 siguen gobernando todo lo que pasa por `authenticated`,
 -- que es por donde entra la aplicación.

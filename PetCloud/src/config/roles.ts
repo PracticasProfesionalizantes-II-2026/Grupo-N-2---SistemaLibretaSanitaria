@@ -1,11 +1,11 @@
-import type { Database } from "@/types/supabase";
+import type { Database } from "@/types/database";
 
 export type UserRole = "dueno" | "veterinario" | "admin";
 
 /**
  * El enum `user_role` tal como está en la base.
  *
- * Se deriva del tipo generado en vez de escribirse a mano: `src/types/supabase.ts`
+ * Se deriva del tipo generado en vez de escribirse a mano: `src/types/database.ts`
  * lo regenera `npm run db:types` y pisa el archivo entero, así que cualquier alias
  * que viviera ahí desaparecería en la primera regeneración. Derivándolo, si algún
  * día se agrega un rol a la base, TypeScript exige completar los dos mapas de

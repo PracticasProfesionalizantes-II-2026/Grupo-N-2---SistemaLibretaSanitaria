@@ -5,7 +5,7 @@ import { sql } from "drizzle-orm";
 import { requireVet } from "@/features/vet/lib/vet-session";
 import { getDb, query } from "@/lib/db";
 import { storageUrl } from "@/lib/storage";
-import type { Tables } from "@/types/supabase";
+import type { Tables } from "@/types/database";
 
 /**
  * Lectura de `vet_signatures` (migración 063; dibujo opcional desde la 067)

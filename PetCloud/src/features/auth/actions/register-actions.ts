@@ -35,7 +35,7 @@ import { vetInstitutions, vetProfessionals } from "@/lib/db/schema/schema";
  *
  * Corre como `service_role` (ver `withServiceRole`): los triggers que
  * protegen matrícula, validación y rol de institución solo dejan pasar ese
- * rol, igual que con el cliente admin de Supabase.
+ * rol, igual que con el cliente admin anterior.
  */
 type AccountInput = {
   nombre: string;

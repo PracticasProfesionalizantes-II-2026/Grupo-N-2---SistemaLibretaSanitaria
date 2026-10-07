@@ -1,5 +1,5 @@
 import type { Purchase, Supplier } from "@/types/erp";
-import type { Database } from "@/types/supabase";
+import type { Database } from "@/types/database";
 
 /**
  * De fila de base a modelo de vista, módulo de Compras (migración 105).

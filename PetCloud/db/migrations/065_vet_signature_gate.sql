@@ -377,7 +377,7 @@ $$ LANGUAGE plpgsql SET search_path = public;
 --     `NEW.signature_id := current_vet_signature_id();`.
 --
 -- El cuerpo exacto de las tres, tal como estaban antes de esta migración, está
--- en `supabase/migrations/064_vet_signature_freeze.sql`: revertir es pegar esos
+-- en `db/migrations/064_vet_signature_freeze.sql`: revertir es pegar esos
 -- tres bloques tal cual.
 --
 -- Revertir NO desestampa nada: los `signature_id` ya escritos son punteros

@@ -6,7 +6,7 @@ import type {
   CustomerPrefill,
   CustomerTaxCondition,
 } from "@/types/erp";
-import type { Database } from "@/types/supabase";
+import type { Database } from "@/types/database";
 
 /**
  * De fila de base a modelo de vista, módulo de Clientes (migración 107).
@@ -16,7 +16,7 @@ import type { Database } from "@/types/supabase";
  *
  * `tipo_documento`, `condicion_iva` y `kind` llegan como `string`: los CHECK
  * de la 107 los restringen en la base, pero un CHECK no es un tipo enumerado
- * y `supabase gen types` no tiene de dónde sacar la unión. Viven en
+ * y el generador de tipos no tiene de dónde sacar la unión. Viven en
  * `types/erp.ts` y se estrechan acá — mismo criterio que `stock-mappers.ts`
  * con `unit`.
  */

@@ -5,7 +5,6 @@ import {
   getCurrentPremiumPrice,
   getInstitutionSubscription,
 } from "@/features/vet/data/subscription";
-import { isPremiumCheckoutSimulado } from "@/features/vet/lib/premium-simulation";
 import { requireVet } from "@/features/vet/lib/vet-session";
 
 export const metadata: Metadata = { title: "Premium" };
@@ -30,14 +29,6 @@ export default async function PremiumPage() {
       premium={vet.premium}
       price={price}
       subscription={subscription}
-      /*
-       * El interruptor se lee acá, del lado del servidor, y baja como prop:
-       * `premium-view.tsx` es `"use client"` y no puede mirar `process.env`.
-       * Que sea una variable de servidor no es un detalle de implementación —
-       * es lo que impide que el modo de cobro se pueda inspeccionar o forzar
-       * desde el navegador.
-       */
-      checkoutSimulado={isPremiumCheckoutSimulado()}
     />
   );
 }

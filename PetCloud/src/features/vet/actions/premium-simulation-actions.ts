@@ -6,7 +6,6 @@ import { revalidatePath } from "next/cache";
 
 import { getCurrentPremiumPrice } from "@/features/vet/data/subscription";
 import type { ActionResult } from "@/features/vet/actions/consultation-actions";
-import { isPremiumCheckoutSimulado } from "@/features/vet/lib/premium-simulation";
 import {
   getPremiumState,
   requireInstitutionOwner,
@@ -18,13 +17,9 @@ import { withServiceRole } from "@/lib/db";
 /**
  * Alta de Premium **simulada**: activa el módulo sin cobrar un peso.
  *
- * Vive en su propio archivo y no dentro de `subscription-actions.ts` a
- * propósito. Aquel archivo es la integración real con Mercado Pago, sigue
- * intacto y sigue cubierto por sus tests; mezclarlos obligaría a releer los
- * dos caminos cada vez que se toca uno, y convertiría un rollback ("apagar la
- * simulación") en un ejercicio de arqueología de diffs. Cuál de los dos corre
- * lo decide `isPremiumCheckoutSimulado()`, que documenta cómo volver al cobro
- * real.
+ * PetCloud es una demo universitaria: no hay pasarela de pago real. Este es
+ * el único camino de alta de Premium, y la pantalla lo anuncia como
+ * "Pago simulado (demo)".
  *
  * Por qué esto escribe de verdad en la base, en vez de mover una bandera en el
  * cliente: el candado del panel no es una decisión de la interfaz. `has_access()`
@@ -36,8 +31,7 @@ import { withServiceRole } from "@/lib/db";
  * `vet_subscriptions` que se escribe acá es una fila real que satisface a
  * `institution_has_premium()`.
  *
- * Escribe con `withServiceRole()` por la misma razón que
- * `subscription-actions.ts`: `vet_subscriptions` no tiene ninguna política de
+ * Escribe con `withServiceRole()` porque `vet_subscriptions` no tiene ninguna política de
  * INSERT ni de UPDATE para `authenticated` (migración 040), así que el cliente
  * de sesión no puede tocarla ni siendo titular. La autorización acá la da
  * `requireInstitutionOwner()`, no RLS.
@@ -71,16 +65,7 @@ const DEMORA_SIMULADA_MS = 2000;
  * otro desarrollador. La salida es un compromiso deliberado y marcado: se
  * escribe el único `provider` que la constraint admite, y la honestidad del
  * dato queda en `provider_subscription_id`, que arranca con `SIMULADO-` y es
- * imposible de confundir con un id de Mercado Pago.
- *
- * Esa forma además garantiza que el webhook no pueda chocar con estas filas.
- * `processMercadoPagoWebhookEvent()` (`lib/subscription-webhook.ts`) busca la
- * suscripción por `.eq("provider_subscription_id", preapprovalId)`, y ese
- * `preapprovalId` no sale nunca del cuerpo del POST: sale del recurso que la
- * propia API de Mercado Pago devuelve (el `resourceId` ya reobtenido, o el
- * `preapproval_id` del pago). Mercado Pago solo emite ids generados por él, de
- * modo que ningún evento real puede resolver a un identificador con este
- * prefijo, y ninguna de estas filas puede ser pisada por un webhook.
+ * imposible de confundir con un id de un proveedor real.
  *
  * El arreglo limpio es una migración que agregue `'simulado'` al CHECK, para
  * que el dato diga lo que es sin depender de una convención de texto. Queda
@@ -95,22 +80,9 @@ function nuevoIdSimulado(): string {
 /**
  * Activa Premium para la institución del titular, sin cobro.
  *
- * Devuelve el mismo `ActionResult` que el resto de las acciones del panel, así
- * que la pantalla trata este camino igual que al real salvo por el destino: no
- * hay `initPoint` al que redirigir, porque no hay adónde ir a pagar.
+ * Devuelve el mismo `ActionResult` que el resto de las acciones del panel.
  */
 export async function simulatePremiumCheckout(): Promise<ActionResult> {
-  // El interruptor se vuelve a comprobar acá y no solo en la pantalla: la
-  // pantalla decide qué botón mostrar, pero una Server Action es un endpoint
-  // público y cualquiera puede invocarla directamente. Sin esta guarda,
-  // apagar la simulación dejaría igualmente abierta la puerta de atrás.
-  if (!isPremiumCheckoutSimulado()) {
-    return {
-      success: false,
-      error: "El alta simulada de Premium está desactivada.",
-    };
-  }
-
   const vet = await requireInstitutionOwner();
 
   const premium = await getPremiumState(vet.institucionId);
@@ -166,6 +138,34 @@ export async function simulatePremiumCheckout(): Promise<ActionResult> {
   // por eso se revalida el segmento con tipo `"layout"`, que es lo que vuelve
   // a ejecutar ese layout y, con él, todo lo que cuelga abajo — la propia
   // pantalla de Premium incluida.
+  revalidatePath("/veterinaria", "layout");
+
+  return { success: true };
+}
+
+/**
+ * Baja simulada: marca la suscripción como cancelada. El acceso sigue hasta
+ * `current_period_end`, igual que una baja real con el período ya pagado.
+ */
+export async function cancelPremiumSimulado(): Promise<ActionResult> {
+  const vet = await requireInstitutionOwner();
+
+  try {
+    await withServiceRole((tx) =>
+      tx.execute(sql`
+        update vet_subscriptions
+           set status = 'cancelled', cancelled_at = now(),
+               provider_updated_at = now()
+         where institution_id = ${vet.institucionId}`),
+    );
+  } catch (error) {
+    console.error("cancelPremiumSimulado", error);
+    return {
+      success: false,
+      error: "No pudimos cancelar la suscripción. Probá de nuevo.",
+    };
+  }
+
   revalidatePath("/veterinaria", "layout");
 
   return { success: true };

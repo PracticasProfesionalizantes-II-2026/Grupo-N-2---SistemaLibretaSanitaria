@@ -6,7 +6,7 @@
  *   - relations.ts is dropped: it duplicates keys when two FKs join the same
  *     tables, and the app uses explicit joins anyway;
  *   - a lint-disable header is added (generated code);
- *   - the SQL snapshot is dropped: supabase/migrations owns the schema.
+ *   - the SQL snapshot is dropped: db/migrations owns the schema.
  */
 import { readdir, readFile, rm, writeFile } from "node:fs/promises";
 import path from "node:path";

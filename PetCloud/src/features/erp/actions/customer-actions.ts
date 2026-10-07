@@ -22,7 +22,7 @@ import {
 } from "@/features/erp/schemas/customer-schemas";
 import { erpWrite } from "@/features/erp/lib/erp-sql";
 import { insertInto, rpc, updateSet } from "@/lib/db";
-import type { Database } from "@/types/supabase";
+import type { Database } from "@/types/database";
 
 /**
  * Escrituras del módulo de Clientes + cuenta corriente (migración 107).
@@ -42,7 +42,7 @@ const aCentavos = (pesos: number) => Math.round(pesos * CENTAVOS);
 /**
  * `balance_cents` lo escribe el trigger `erp_account_movements_apply` (107)
  * sumando los movimientos de cuenta, igual que `stock` sale del libro de
- * movimientos (101). El tipo generado lo marca opcional —`supabase gen types`
+ * movimientos (101). El tipo generado lo marca opcional —el generador de tipos
  * no distingue "tiene default" de "no la escribas vos"—, así que el `Omit`
  * restituye la garantía: fijar un saldo a mano vuelve a ser un error de
  * compilación. Es la misma barrera que llevaba `lib/erp-db.ts` antes de

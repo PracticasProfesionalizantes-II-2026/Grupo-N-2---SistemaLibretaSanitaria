@@ -3,7 +3,6 @@ import { PawPrint, ShieldCheck, Syringe } from "lucide-react";
 import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { QrPlaceholder } from "@/components/ui/qr-placeholder";
-import { InstallAppButton } from "@/features/pwa/components/install-app-button";
 
 export function Hero() {
   return (
@@ -35,15 +34,6 @@ export function Hero() {
             <ButtonLink href="/login" variant="outline" size="lg">
               Ingresar a mi cuenta
             </ButtonLink>
-          </div>
-
-          <div className="mt-3">
-            <InstallAppButton
-              label="Descargar app"
-              variant="ghost"
-              size="lg"
-              className="w-full sm:w-auto"
-            />
           </div>
 
           <p className="text-muted-foreground mt-5 text-sm font-medium">

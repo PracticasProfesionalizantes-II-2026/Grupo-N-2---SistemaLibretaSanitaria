@@ -17,7 +17,7 @@
 -- comportamiento actual para el caso de un solo dueño, sin cambios.
 --
 -- Va en un trigger `BEFORE DELETE ON profiles`, no en la aplicación: la
--- cuenta se puede borrar por muchos caminos (backoffice, Supabase Auth
+-- cuenta se puede borrar por muchos caminos (backoffice, el servicio de auth
 -- directo, un futuro flujo de "borrar mi cuenta"), y la regla tiene que
 -- cumplirse pase lo que pase, no solo cuando la borra un botón específico.
 -- Se dispara también en cascada desde `auth.users` — `profiles.id REFERENCES

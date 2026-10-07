@@ -6,7 +6,7 @@ import path from "node:path";
 import { BlobServiceClient } from "@azure/storage-blob";
 
 /**
- * File storage (ex Supabase Storage). Same bucket names as before:
+ * File storage (ex hosted storage service). Same bucket names as before:
  * pet-documents, pet-photos, profile-photos, vet-signatures (+ medical studies).
  *
  * Driver chosen by STORAGE_DRIVER:

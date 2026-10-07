@@ -20,7 +20,7 @@ import {
 } from "@/features/erp/schemas/stock-schemas";
 import { erpWrite } from "@/features/erp/lib/erp-sql";
 import { insertInto, query, rpc, updateSet } from "@/lib/db";
-import type { Database } from "@/types/supabase";
+import type { Database } from "@/types/database";
 
 /**
  * Escrituras del módulo de stock (migración 101).
@@ -41,7 +41,7 @@ export type ActionResult =
 /**
  * Los tipos generados son más permisivos que la base.
  *
- * `supabase gen types` marca opcional toda columna que tenga default o que
+ * el generador de tipos marca opcional toda columna que tenga default o que
  * escriba un trigger — no distingue "podés omitirla" de "no la escribas vos".
  * `stock` lo lleva el trigger de la 101 sumando el libro de movimientos, y
  * `created_at`/`updated_at` los ponen el default y el trigger de fecha: dejar

@@ -14,7 +14,7 @@ import {
 } from "@/features/erp/schemas/team-schemas";
 import { erpWrite } from "@/features/erp/lib/erp-sql";
 import { insertInto, query, updateSet } from "@/lib/db";
-import type { Database } from "@/types/supabase";
+import type { Database } from "@/types/database";
 
 /**
  * Escrituras del módulo de Equipo (migración 111).

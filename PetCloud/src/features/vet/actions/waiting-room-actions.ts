@@ -18,7 +18,7 @@ import { requireVet } from "@/features/vet/lib/vet-session";
 import { getDb, insertInto, query, rpc, withUser } from "@/lib/db";
 import { VISIT_SELECT } from "@/features/vet/lib/vet-sql";
 import type { ActionResult } from "@/features/vet/actions/consultation-actions";
-import type { Database } from "@/types/supabase";
+import type { Database } from "@/types/database";
 import { hoyArgentina, limitesDiaArgentina } from "@/lib/argentina-time";
 
 type VisitInsert = Database["public"]["Tables"]["visits"]["Insert"];

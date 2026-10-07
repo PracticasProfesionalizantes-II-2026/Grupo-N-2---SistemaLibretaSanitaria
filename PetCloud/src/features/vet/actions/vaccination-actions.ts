@@ -9,7 +9,7 @@ import { toVaccineApplication } from "@/features/vet/lib/mappers";
 import { motivoSinFirma } from "@/features/vet/lib/puede-firmar";
 import { requireVet } from "@/features/vet/lib/vet-session";
 import { getDb, insertInto, query, withUser } from "@/lib/db";
-import type { Tables } from "@/types/supabase";
+import type { Tables } from "@/types/database";
 import type { ActionResult } from "@/features/vet/actions/consultation-actions";
 import type { VaccineApplication } from "@/types/vet";
 

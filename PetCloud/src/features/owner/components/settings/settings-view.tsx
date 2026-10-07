@@ -21,7 +21,6 @@ import { ConfirmDialog } from "@/components/ui/confirm-dialog";
 import { PageHeader } from "@/components/ui/page-header";
 import { deleteOwnerAccount } from "@/features/owner/actions/account-actions";
 import { useSessionUser } from "@/features/auth/components/session-provider";
-import { InstallAppSection } from "@/features/pwa/components/install-app-section";
 import { useIsMounted } from "@/lib/use-is-mounted";
 import { cn } from "@/lib/utils";
 import { useSignOut } from "@/features/auth/lib/use-sign-out";
@@ -140,7 +139,6 @@ export function SettingsView() {
           </div>
         </Card>
 
-        <InstallAppSection />
 
         <Card className="p-5">
           <h2 className="text-foreground font-semibold">Privacidad y datos</h2>

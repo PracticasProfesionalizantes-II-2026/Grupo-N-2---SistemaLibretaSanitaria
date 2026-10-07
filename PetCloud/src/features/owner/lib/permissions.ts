@@ -1,5 +1,5 @@
-import { Constants } from "@/types/supabase";
-import type { Database } from "@/types/supabase";
+import { Constants } from "@/types/database";
+import type { Database } from "@/types/database";
 
 /**
  * Nada en el repo expresaba en TypeScript el orden `view < edit < owner`

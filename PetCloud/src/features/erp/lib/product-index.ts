@@ -5,7 +5,7 @@ import type { Product } from "@/types/erp";
  * Índice en memoria para resolver un código escaneado o tipeado a un
  * producto, sin viajar al servidor.
  *
- * Puro: no lee de Supabase, no conoce React. `sales/page.tsx` ya trae el
+ * Puro: no lee de la base, no conoce React. `sales/page.tsx` ya trae el
  * catálogo completo con `listProducts()`; una nueva `listBarcodes()` (Fase
  * 2.2) suma los códigos al mismo `Promise.all`, y el índice se construye una
  * vez por render con `useMemo`.

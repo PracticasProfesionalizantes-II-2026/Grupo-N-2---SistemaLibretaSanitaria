@@ -2,7 +2,7 @@
 // cualquier cambio se pierde en la próxima regeneración.
 //
 // Para que este archivo cambie, cambiá el esquema con una migración nueva en
-// `supabase/migrations/` y volvé a generarlo.
+// `db/migrations/` y volvé a generarlo.
 
 export type Json =
   | string
@@ -3815,7 +3815,7 @@ export type Database = {
   };
 };
 
-type DatabaseWithoutInternals = Omit<Database, "__InternalSupabase">;
+type DatabaseWithoutInternals = Omit<Database, "__InternalDb">;
 
 type DefaultSchema = DatabaseWithoutInternals[Extract<
   keyof Database,

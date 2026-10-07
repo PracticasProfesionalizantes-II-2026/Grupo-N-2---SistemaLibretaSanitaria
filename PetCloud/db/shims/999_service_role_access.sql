@@ -1,6 +1,6 @@
 -- Runs after every migration (re-applied on each db:migrate run).
 --
--- Supabase's service_role has BYPASSRLS and default privileges on everything.
+-- The service_role has BYPASSRLS and default privileges on everything.
 -- On Azure the admin cannot grant BYPASSRLS, so this emulates it: full grants
 -- plus a permissive `service_role_all` policy on every RLS-enabled table.
 -- RLS enforcement for end users is out of scope for now (the app connects as

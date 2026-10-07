@@ -10,7 +10,7 @@ import { toDbSpecies } from "@/features/owner/lib/mappers";
 import { toVaccinePreset } from "@/features/vet/lib/mappers";
 import { requireVet } from "@/features/vet/lib/vet-session";
 import { getDb, query, withUser } from "@/lib/db";
-import type { Tables } from "@/types/supabase";
+import type { Tables } from "@/types/database";
 import type { Species } from "@/types/pet";
 import type { VaccinePreset } from "@/types/vet";
 

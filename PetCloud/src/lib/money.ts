@@ -2,9 +2,7 @@
  * Plata en centavos de peso argentino (`amount_cents BIGINT`, migración 039).
  *
  * La base y el resto de la aplicación trabajan siempre en centavos: un entero
- * no tiene drift de redondeo. Mercado Pago, en cambio, espera el monto en
- * pesos con hasta dos decimales — la conversión ocurre acá, en el borde con
- * esa API externa, nunca dentro de la base ni en medio de un cálculo.
+ * no tiene drift de redondeo.
  */
 
 export function formatARS(cents: number) {
@@ -12,11 +10,6 @@ export function formatARS(cents: number) {
     style: "currency",
     currency: "ARS",
   });
-}
-
-/** Centavos → pesos, el formato que espera el body de la API de Mercado Pago. */
-export function centsToMpAmount(cents: number) {
-  return Math.round(cents) / 100;
 }
 
 /**

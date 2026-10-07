@@ -1,5 +1,5 @@
 import type { CashAccount, CashMovement, CashMovementKind } from "@/types/erp";
-import type { Database } from "@/types/supabase";
+import type { Database } from "@/types/database";
 
 /**
  * De fila de base a modelo de vista, módulo de Caja (migración 106).
@@ -10,7 +10,7 @@ import type { Database } from "@/types/supabase";
  *
  * `kind` llega como `string`: el CHECK de `erp.cash_movements.kind` (106, más
  * `cobro_cta_cte` en la 107) restringe los valores en la base, pero un CHECK
- * no es un tipo enumerado y `supabase gen types` no tiene de dónde sacar la
+ * no es un tipo enumerado y el generador de tipos no tiene de dónde sacar la
  * unión. Vive en `types/erp.ts` y se estrecha acá — mismo criterio que
  * `stock-mappers.ts` con `unit`.
  */

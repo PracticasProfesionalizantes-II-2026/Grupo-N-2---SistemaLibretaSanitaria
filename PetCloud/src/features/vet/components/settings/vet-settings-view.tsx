@@ -13,7 +13,6 @@ import { PageHeader } from "@/components/ui/page-header";
 import { PasswordInput } from "@/components/ui/password-input";
 import { Switch } from "@/components/ui/switch";
 import { useVetSession } from "@/features/vet/components/shell/vet-session-provider";
-import { InstallAppSection } from "@/features/pwa/components/install-app-section";
 import { useIsMounted } from "@/lib/use-is-mounted";
 import { cn } from "@/lib/utils";
 import { useSignOut } from "@/features/auth/lib/use-sign-out";
@@ -197,8 +196,6 @@ export function VetSettingsView({ firma }: { firma: ReactNode }) {
             ))}
           </div>
         </Card>
-
-        <InstallAppSection />
 
         {firma}
 

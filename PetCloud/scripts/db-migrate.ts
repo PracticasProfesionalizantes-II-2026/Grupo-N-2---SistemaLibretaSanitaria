@@ -2,8 +2,8 @@
  * Applies the database schema to the Postgres pointed at by DATABASE_URL.
  *
  * Order:
- *   1. db/shims/0xx_*.sql   — Supabase compatibility surface (idempotent, every run)
- *   2. supabase/migrations/*.sql — once each, tracked in public._migrations
+ *   1. db/shims/0xx_*.sql   — compatibility surface (auth schema, roles) (idempotent, every run)
+ *   2. db/migrations/*.sql — once each, tracked in public._migrations
  *   3. db/shims/9xx_*.sql   — post-migration fixes (idempotent, every run)
  *
  * Each file runs in its own transaction; the first failure aborts the run.
@@ -22,7 +22,7 @@ loadEnv({ quiet: true });
 
 const ROOT = path.resolve(import.meta.dirname, "..");
 const SHIMS_DIR = path.join(ROOT, "db/shims");
-const MIGRATIONS_DIR = path.join(ROOT, "supabase/migrations");
+const MIGRATIONS_DIR = path.join(ROOT, "db/migrations");
 const POST_SHIM_PREFIX = "9";
 
 const dryRun = process.argv.includes("--dry");
@@ -58,7 +58,7 @@ async function runFile(client: pg.Client, file: string, label: string) {
 async function main() {
   const url = process.env.DATABASE_URL;
   if (!url) {
-    console.error("DATABASE_URL is not set (see .env.example).");
+    console.error("DATABASE_URL is not set (see docs/desarrollo/entorno-local.md).");
     process.exit(1);
   }
 

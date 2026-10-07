@@ -36,7 +36,7 @@ entra cada rol. La usan `src/proxy.ts` (filtro por rol a partir de la sesión) y
 
 ## Capa de datos
 
-- El esquema lo definen las migraciones SQL de `supabase/migrations/` (nombre
+- El esquema lo definen las migraciones SQL de `db/migrations/` (nombre
   heredado de la primera versión del proyecto). `npm run db:migrate` las aplica
   en orden junto con `db/shims/`, que recrea lo mínimo que esas migraciones
   esperan (`auth.users`, `auth.uid()`, roles).
@@ -49,4 +49,4 @@ entra cada rol. La usan `src/proxy.ts` (filtro por rol a partir de la sesión) y
   de las migraciones no filtran: los permisos se resuelven en los guards del
   servidor y con filtros explícitos en cada consulta.
 - `src/lib/db/schema/` se genera desde la base (`npm run db:introspect`).
-  `src/types/supabase.ts` tipa las filas en snake_case y se ajusta a mano.
+  `src/types/database.ts` tipa las filas en snake_case y se ajusta a mano.

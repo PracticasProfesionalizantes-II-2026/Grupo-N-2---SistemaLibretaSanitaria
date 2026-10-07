@@ -1,4 +1,4 @@
-import type { Database } from "@/types/supabase";
+import type { Database } from "@/types/database";
 import type { VisitPriority, VisitStatus } from "@/types/visit";
 import type { VaccineApplication, VaccinePreset } from "@/types/vet";
 import type { Consultation, Species } from "@/types/pet";

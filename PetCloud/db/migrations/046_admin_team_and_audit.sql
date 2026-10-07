@@ -119,7 +119,7 @@ CREATE POLICY "admin_action_log_select" ON admin_action_log FOR SELECT
 --
 -- Escritor único y privado. `SECURITY DEFINER` para poder insertar sin
 -- ninguna política de INSERT. El `REVOKE` de más abajo revoca `PUBLIC`, pero
--- NO es la única defensa: `supabase/seed.sql` (entorno local) hace
+-- NO es la única defensa: `seed.sql` (entorno local) hace
 -- `GRANT ALL ON ALL FUNCTIONS IN SCHEMA public TO anon, authenticated,
 -- service_role` a propósito, para imitar el default privilege real que ya
 -- trae producción — así que ese REVOKE por sí solo no sostiene el bloqueo en
@@ -446,7 +446,7 @@ GRANT EXECUTE ON FUNCTION admin_register_municipality(TEXT, TEXT, TEXT, TEXT, TE
 -- `authenticated` es imprescindible para que PostgREST siquiera enrute la
 -- llamada — así que el `IF NOT is_platform_admin()` de la primera línea de
 -- cada cuerpo es lo único que separa a cualquier cuenta con sesión de un
--- volcado completo de cuentas/PII vía `supabase.rpc()` directo, saltando por
+-- volcado completo de cuentas/PII vía `rpc()` directo, saltando por
 -- completo el `requireAdmin()` de la página. Por eso el assert va **antes**
 -- de cualquier SELECT, no después ni intercalado — no hay ninguna versión de
 -- este cuerpo que junte una fila antes de haber confirmado el rol de quien

@@ -4,9 +4,6 @@ import { Plus_Jakarta_Sans } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { AppToaster } from "@/components/ui/app-toaster";
 import { siteConfig } from "@/config/site";
-import { InstallAppBanner } from "@/features/pwa/components/install-app-banner";
-import { ServiceWorkerRegistration } from "@/features/pwa/components/service-worker-registration";
-import { SCRIPT_CAPTURA_TEMPRANA } from "@/features/pwa/lib/early-capture-script";
 import { getSiteUrlFromEnv } from "@/lib/site-url";
 
 import "./globals.css";
@@ -37,12 +34,8 @@ export const metadata: Metadata = {
   },
   description: DESCRIPCION,
   applicationName: siteConfig.name,
-  manifest: "/manifest.webmanifest",
   icons: {
-    icon: [
-      { url: "/icon.svg", type: "image/svg+xml" },
-      { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
-    ],
+    icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
     apple: "/apple-touch-icon.png",
   },
   // Se comparte por WhatsApp entre vecinos y por mail a municipios: sin esto el
@@ -70,8 +63,7 @@ export const metadata: Metadata = {
   },
 };
 
-// Mismo valor que "theme_color" en manifest.webmanifest: es lo que pinta la
-// barra del navegador en Android/Chrome, con o sin la app instalada.
+// Color que pinta la barra del navegador en Android/Chrome.
 export const viewport: Viewport = {
   themeColor: "#111827",
 };
@@ -84,25 +76,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       suppressHydrationWarning
     >
       <body className="bg-background text-foreground flex min-h-full flex-col">
-        {/*
-          Guarda `beforeinstallprompt` antes de hidratar: si Chrome lo dispara
-          antes de que React enganche sus listeners, se pierde para siempre.
-          Es un <script> inline común, igual que el de next-themes, y no un
-          `next/script` con `beforeInteractive`: con contenido inline, ese
-          queda encolado en `self.__next_s` y recién corre cuando carga el
-          runtime de Next. Este corre mientras se parsea el HTML.
-          Ver `early-capture-script.ts`.
-        */}
-        <script
-          id="petcloud-captura-instalacion"
-          suppressHydrationWarning
-          dangerouslySetInnerHTML={{ __html: SCRIPT_CAPTURA_TEMPRANA }}
-        />
         <ThemeProvider>
           {children}
           <AppToaster />
-          <ServiceWorkerRegistration />
-          <InstallAppBanner />
         </ThemeProvider>
       </body>
     </html>

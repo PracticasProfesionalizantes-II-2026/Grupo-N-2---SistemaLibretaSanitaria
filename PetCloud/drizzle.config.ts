@@ -5,7 +5,7 @@ loadEnv({ path: ".env.local", quiet: true });
 
 /**
  * Drizzle is used as a typed query builder only. The schema is owned by the
- * SQL files in supabase/migrations (applied with `npm run db:migrate`), and
+ * SQL files in db/migrations (applied with `npm run db:migrate`), and
  * src/lib/db/schema is regenerated from the live database with
  * `npm run db:introspect`. Never run `drizzle-kit push/generate` here.
  */

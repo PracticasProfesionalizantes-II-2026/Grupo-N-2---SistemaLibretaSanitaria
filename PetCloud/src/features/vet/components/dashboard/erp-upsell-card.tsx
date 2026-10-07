@@ -29,7 +29,7 @@ const VENTAJAS = [
 export function ErpUpsellCard({
   /**
    * Solo el titular puede dar de alta la suscripción:
-   * `simulatePremiumCheckout()` y `startPremiumCheckout()` pasan por
+   * `simulatePremiumCheckout()` pasa por
    * `requireInstitutionOwner()`, que tira excepción con cualquier otro rol.
    * Por eso el resto del equipo ve la misma propuesta pero sin botón de
    * compra: un botón que garantizado explota es peor que no tenerlo.

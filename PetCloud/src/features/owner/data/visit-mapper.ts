@@ -1,6 +1,6 @@
 import { sql } from "drizzle-orm";
 
-import type { Database } from "@/types/supabase";
+import type { Database } from "@/types/database";
 import type { Visit, VisitStatus } from "@/types/visit";
 
 /**

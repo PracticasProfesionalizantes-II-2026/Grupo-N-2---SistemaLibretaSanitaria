@@ -57,7 +57,7 @@ export function extractQrCode(raw: string): string | null {
  * Si lo hiciera, un collar viejo que alguien encuentre llevaría a un animal que
  * no es — el peor final posible para esta función.
  *
- * `isTaken` se inyecta para que esto no dependa de Supabase y se pueda probar.
+ * `isTaken` se inyecta para que esto no dependa de la base y se pueda probar.
  */
 export async function generateUniqueQrCode(
   isTaken: (code: string) => Promise<boolean>,

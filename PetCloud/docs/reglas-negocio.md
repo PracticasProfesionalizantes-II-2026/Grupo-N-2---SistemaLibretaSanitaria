@@ -11,8 +11,8 @@ El mapa del código está en [arquitectura](arquitectura.md).
 ## El servicio es gratuito para dueños y veterinarias
 
 Dueños y veterinarias no pagan por usar PetCloud. Lo único pago es el módulo
-Premium de veterinarias (turnos y ERP), que se cobra con Mercado Pago (en el
-entorno de demo el cobro se simula).
+Premium de veterinarias (turnos y ERP). En esta demo el pago es simulado: no
+hay pasarela de pago real.
 
 ## Lo que carga el dueño no es lo mismo que lo que firma un profesional
 

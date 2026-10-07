@@ -19,7 +19,7 @@ import {
   PET_SELECT,
   VISIT_SELECT,
 } from "@/features/vet/lib/vet-sql";
-import type { Tables } from "@/types/supabase";
+import type { Tables } from "@/types/database";
 import type { Patient } from "@/types/vet";
 
 /**

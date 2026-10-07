@@ -76,7 +76,7 @@ export async function recordCashMovement(
   //
   // `p_note` va omitido y no en `null`: en la base es `TEXT DEFAULT NULL`
   // (106) y el tipo generado lo escribe `p_note?: string`, porque
-  // `supabase gen types` no conserva la nulabilidad de un argumento con
+  // el generador de tipos no conserva la nulabilidad de un argumento con
   // default. Omitirlo deja el mismo NULL que mandaba el `null` explícito —
   // es lo que ya hacía `voidCashMovement()` acá abajo con `p_reason`.
   const error = await erpWrite(vet.usuario.id, (tx) =>
