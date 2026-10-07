@@ -25,7 +25,7 @@ no equivale a una dosis aplicada y firmada por una matrícula. La pantalla lo di
 
 "Al día" / "vencido" se calcula mirando las vacunas contra la fecha de hoy. Una
 columna guardada diría "al día" sobre una vacuna que venció ayer, porque nadie
-la recalculó. Lo mismo aplica a los recordatorios.
+la recalculó. Lo mismo aplica al plan de próximas dosis.
 
 ## "Sin datos" no es "al día"
 
