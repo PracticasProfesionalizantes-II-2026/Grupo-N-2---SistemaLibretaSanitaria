@@ -12,7 +12,7 @@ import type { Database } from "@/types/database";
  *
  * The app connects with a single admin role (DATABASE_URL). That role owns the
  * tables, so RLS policies are NOT enforced for it — accepted for now, see
- * docs/arquitectura.md. What still runs is everything inside the database that
+ * the repository README. What still runs is everything inside the database that
  * reads the identity from the request GUCs (`auth.uid()`): SECURITY DEFINER
  * RPCs, triggers and guards. That is what `withUser` provides.
  */
@@ -28,7 +28,7 @@ function createPool(): pg.Pool {
   const url = process.env.DATABASE_URL;
   if (!url) {
     throw new Error(
-      "Falta DATABASE_URL en .env.local (ver docs/desarrollo/entorno-local.md).",
+      "Falta DATABASE_URL en .env.local (ver README del repositorio).",
     );
   }
 

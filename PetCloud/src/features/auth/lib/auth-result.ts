@@ -29,7 +29,7 @@ export function notConfigured() {
   return {
     success: false as const,
     error:
-      "Falta configurar la base de datos: creá .env.local con DATABASE_URL y AUTH_SECRET (ver docs/desarrollo/entorno-local.md).",
+      "Falta configurar la base de datos: creá .env.local con DATABASE_URL y AUTH_SECRET (ver README del repositorio).",
     code: "sin-configurar" as const,
   };
 }

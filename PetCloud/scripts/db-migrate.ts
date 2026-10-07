@@ -58,7 +58,7 @@ async function runFile(client: pg.Client, file: string, label: string) {
 async function main() {
   const url = process.env.DATABASE_URL;
   if (!url) {
-    console.error("DATABASE_URL is not set (see docs/desarrollo/entorno-local.md).");
+    console.error("DATABASE_URL is not set (see the repository README).");
     process.exit(1);
   }
 

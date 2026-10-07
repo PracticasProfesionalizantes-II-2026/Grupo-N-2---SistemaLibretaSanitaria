@@ -23,7 +23,7 @@ export const DEMO_PENDING_INSTITUTION = "Clínica Patitas (demo)";
 export async function connect() {
   const url = process.env.DATABASE_URL;
   if (!url) {
-    console.error("DATABASE_URL is not set (see docs/desarrollo/entorno-local.md).");
+    console.error("DATABASE_URL is not set (see the repository README).");
     process.exit(1);
   }
 

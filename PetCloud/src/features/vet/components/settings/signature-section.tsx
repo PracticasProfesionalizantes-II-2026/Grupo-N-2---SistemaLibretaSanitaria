@@ -24,7 +24,7 @@ import { fechaArgentina } from "@/lib/argentina-time";
  * Reemplaza al `<input type="file">` que solo mostraba un `toast.success` y no
  * escribía en ningún lado.
  *
- * Tres estados, y ninguno es un control muerto —`docs/reglas-negocio.md` lo
+ * Tres estados, y ninguno es un control muerto —la especificación del proyecto lo
  * pide así: siempre el motivo, nunca un botón apagado sin explicación—:
  *
  *   · **Recepción**: no ejerce con matrícula, así que la sección no le aplica y

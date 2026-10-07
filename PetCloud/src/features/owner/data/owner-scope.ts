@@ -8,7 +8,7 @@ import { getDb, query } from "@/lib/db";
  * Alcance de "lo mío" en el portal del dueño: mascotas propias más las
  * compartidas con él vía `pet_shared_access`.
  *
- * La base no aplica RLS para la conexión de la app (ver docs/arquitectura.md),
+ * La base no aplica RLS para la conexión de la app (ver README del repositorio),
  * así que toda lectura del portal acota explícitamente con este módulo.
  */
 

@@ -15,7 +15,7 @@ export const rangoPermiso = (p: Permiso): number =>
   Constants.public.Enums.share_permission.indexOf(p);
 
 /**
- * Qué puede hacer cada nivel (ver docs/reglas-negocio.md). La que hace cumplir
+ * Qué puede hacer cada nivel (ver la especificación del proyecto). La que hace cumplir
  * esto es la RLS; estos helpers solo deciden qué botones mostrar. Sin permiso
  * (`undefined`: mascota ajena o sin sesión) no se ofrece nada.
  */

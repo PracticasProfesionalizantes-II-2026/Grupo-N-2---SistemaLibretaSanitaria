@@ -9,7 +9,7 @@ import { getStorage, PUBLIC_BUCKETS } from "@/lib/storage";
  *
  * Per-object authorization (the storage.objects RLS policies) is not enforced
  * yet: any signed-in user can read a private file if they know its path.
- * Paths contain random UUIDs, which limits guessing. See docs/arquitectura.md.
+ * Paths contain random UUIDs, which limits guessing. See the project specification.
  */
 export async function GET(
   _request: Request,

@@ -3,7 +3,7 @@
  *
  *     DEMO_PASSWORD=<password> npm run seed:demo
  *
- * Accounts (all with DEMO_PASSWORD, see docs/desarrollo/entorno-local.md):
+ * Accounts (all with DEMO_PASSWORD, see the repository README):
  *   - dueno@petcloud.local          owner with two pets, patients of the demo
  *                                   vet (signed consultations and vaccines)
  *   - vet@petcloud.local            vet with a validated license, an
@@ -27,7 +27,7 @@ import {
 
 const password = process.env.DEMO_PASSWORD;
 if (!password) {
-  console.error("Set DEMO_PASSWORD (see docs/desarrollo/entorno-local.md).");
+  console.error("Set DEMO_PASSWORD (see the repository README).");
   process.exit(1);
 }
 
