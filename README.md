@@ -19,16 +19,7 @@
 
 ![Diagrama de clases](PetCloud/docs/diagrama-de-clases.png)
 
-## Tecnologías
-
-Next.js, React y TypeScript para la aplicación, Tailwind CSS para el diseño y PostgreSQL en Azure como base de datos.
-
 ## Cómo ejecutarlo
-
-Requisitos:
-
-- Node.js 22 o superior.
-- Un archivo `PetCloud/.env.local` con `DATABASE_URL` y `AUTH_SECRET`. El equipo comparte las credenciales de la base.
 
 Pasos:
 
