@@ -108,13 +108,6 @@ export function ReminderFormModal({
       }
     >
       <div className="space-y-5">
-        {reminder?.automatico ? (
-          <Alert variant="info">
-            Este recordatorio lo generó el sistema a partir de un registro
-            sanitario. No se puede editar ni eliminar.
-          </Alert>
-        ) : null}
-
         {error ? <Alert variant="danger">{error}</Alert> : null}
 
         <Field label="Título" htmlFor="titulo" required>

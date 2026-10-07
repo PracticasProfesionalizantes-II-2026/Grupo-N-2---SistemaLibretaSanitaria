@@ -15,7 +15,6 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
 
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ConfirmDialog } from "@/components/ui/confirm-dialog";
 import { EmptyState } from "@/components/ui/empty-state";
@@ -88,7 +87,7 @@ export function RemindersView({
     <div>
       <PageHeader
         title="Recordatorios"
-        description="Los de vacunas, antiparasitarios y controles los crea el sistema automáticamente."
+        description="Creá recordatorios para lo que tu mascota necesite: vacunas, antiparasitarios, controles o lo que quieras."
         actions={
           <Button onClick={() => setCreating(true)}>
             <Plus className="size-4" />
@@ -161,9 +160,6 @@ export function RemindersView({
                     {reminder.titulo}
                   </h2>
                   <ReminderStatusChip status={reminder.estado} />
-                  {reminder.automatico ? (
-                    <Badge variant="neutral">Automático</Badge>
-                  ) : null}
                 </div>
 
                 <p className="text-muted-foreground mt-1 text-sm">
@@ -188,17 +184,9 @@ export function RemindersView({
               </div>
 
               <div className="flex shrink-0 gap-2">
-                {/* Los automáticos no se editan ni se eliminan: los mantiene el
-                    sistema */}
                 <button
                   type="button"
                   onClick={() => setEditing(reminder)}
-                  disabled={reminder.automatico}
-                  title={
-                    reminder.automatico
-                      ? "Los recordatorios automáticos no se pueden editar"
-                      : undefined
-                  }
                   className="border-border hover:bg-muted text-foreground flex size-9 items-center justify-center rounded-lg border disabled:cursor-not-allowed disabled:opacity-40"
                   aria-label={`Editar ${reminder.titulo}`}
                 >
@@ -208,12 +196,6 @@ export function RemindersView({
                 <button
                   type="button"
                   onClick={() => setDeleting(reminder)}
-                  disabled={reminder.automatico}
-                  title={
-                    reminder.automatico
-                      ? "Los recordatorios automáticos no se pueden eliminar"
-                      : undefined
-                  }
                   className="border-border hover:bg-muted hover:text-danger text-foreground flex size-9 items-center justify-center rounded-lg border disabled:cursor-not-allowed disabled:opacity-40"
                   aria-label={`Eliminar ${reminder.titulo}`}
                 >

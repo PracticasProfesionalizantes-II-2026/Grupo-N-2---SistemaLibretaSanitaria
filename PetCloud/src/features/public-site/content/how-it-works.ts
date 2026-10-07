@@ -55,9 +55,9 @@ export const stages: Stage[] = [
   {
     numero: "05",
     actor: "Dueño",
-    titulo: "Recibís recordatorios automáticos",
+    titulo: "Organizás tus recordatorios",
     descripcion:
-      "Cuando se carga una vacuna o un antiparasitario con próxima dosis, el sistema te avisa 7 días antes del vencimiento: en la app y, si lo activaste, por correo. Sin que tengas que anotar nada.",
+      "Creás recordatorios para vacunas, antiparasitarios o controles y los consultás en la app, junto con la próxima dosis que registró el veterinario.",
     icon: BellRing,
   },
   {
@@ -108,7 +108,7 @@ export const ownerBenefits = [
     icon: BellRing,
     titulo: "No se te pasa una vacuna",
     texto:
-      "Avisos automáticos antes de que venza una vacuna o un antiparasitario.",
+      "La próxima dosis queda registrada en la libreta y podés agendar tus propios recordatorios.",
   },
   {
     icon: FileDown,

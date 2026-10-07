@@ -74,9 +74,9 @@ export const features: IconCardItem[] = [
   },
   {
     icon: BellRing,
-    title: "Recordatorios automáticos",
+    title: "Recordatorios",
     description:
-      "Aviso en la app, y por correo si querés, 7 días antes de que venza una vacuna o un antiparasitario.",
+      "Agendá recordatorios para vacunas, antiparasitarios y controles, y consultalos en la app.",
   },
   {
     icon: QrCode,

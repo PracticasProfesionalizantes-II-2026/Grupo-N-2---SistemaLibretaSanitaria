@@ -357,6 +357,5 @@ export function toReminder(row: Row<"reminders">): Reminder {
     repeticion: REPETICION[row.repeat],
     canales: row.channel === "both" ? ["push", "email"] : [row.channel],
     estado: reminderStatus(row),
-    automatico: row.source !== "manual",
   };
 }

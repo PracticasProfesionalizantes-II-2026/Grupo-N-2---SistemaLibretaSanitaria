@@ -158,11 +158,7 @@ export function RecordAntiparasiticModal({
               onChange={(e) => setFecha(e.target.value)}
             />
           </Field>
-          <Field
-            label="Próxima aplicación"
-            htmlFor="proxima"
-            hint="Genera un recordatorio automático"
-          >
+          <Field label="Próxima aplicación" htmlFor="proxima">
             <Input
               id="proxima"
               type="date"

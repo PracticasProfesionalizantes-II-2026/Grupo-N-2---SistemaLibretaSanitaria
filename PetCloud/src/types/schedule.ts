@@ -13,6 +13,4 @@ export type Reminder = {
   repeticion: ReminderRepeat;
   canales: ("push" | "email")[];
   estado: ReminderStatus;
-  /** Los automáticos los genera el sistema (vacunas, controles): se editan pero no se eliminan. */
-  automatico: boolean;
 };

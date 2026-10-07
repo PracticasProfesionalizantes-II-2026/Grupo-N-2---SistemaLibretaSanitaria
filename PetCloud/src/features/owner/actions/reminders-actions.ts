@@ -89,10 +89,8 @@ export async function createReminder(
  * aparecerlo en otra, arrastrando el historial de avisos ya despachados de la
  * primera. Para eso se borra y se crea de nuevo.
  *
- * El filtro `source = 'manual'` es lo que hace que los automáticos —los que
- * genera el sistema a partir de una fecha de vacuna— no se puedan reescribir:
- * un recordatorio generado es el rastro de un vencimiento, no una nota. Y la
- * guarda de cero filas hace falta igual que en `deletePet`: si el filtro (o
+ * El filtro `source = 'manual'` deja afuera filas heredadas de otro origen
+ * (hoy solo se crean recordatorios manuales). Y la guarda de cero filas hace falta igual que en `deletePet`: si el filtro (o
  * RLS) no matchea nada, Postgres no devuelve error, toca cero filas y contesta
  * que salió bien.
  */
@@ -116,8 +114,7 @@ export async function updateReminder(
   if (!actualizado) {
     return {
       success: false,
-      error:
-        "Los recordatorios automáticos no se editan: los genera el sistema.",
+      error: "No se encontró el recordatorio.",
     };
   }
 
@@ -130,7 +127,7 @@ export async function deleteReminder(
 ): Promise<ActionResult> {
   const user = await requireUser();
 
-  // Solo los manuales y propios; si es automático no se borra nada.
+  // Solo los manuales y propios.
   const borrado = await escribir(
     user.id,
     sql`delete from reminders
@@ -140,7 +137,7 @@ export async function deleteReminder(
   if (!borrado) {
     return {
       success: false,
-      error: "Los recordatorios automáticos no se borran, se descartan.",
+      error: "No se encontró el recordatorio.",
     };
   }
 

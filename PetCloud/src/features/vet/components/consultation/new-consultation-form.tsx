@@ -360,7 +360,7 @@ export function NewConsultationForm({
           <Field
             label="Próximo control"
             htmlFor="proximoControl"
-            hint="Opcional. Genera automáticamente un recordatorio para el dueño."
+            hint="Opcional. Queda registrado en la consulta como próximo control."
           >
             <Input
               id="proximoControl"
